@@ -8,9 +8,9 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.module.css';
 
-import helsinkiImage from './images/location_helsinki.jpg';
-import rovaniemiImage from './images/location_rovaniemi.jpg';
-import rukaImage from './images/location_ruka.jpg';
+import gippslandImage from './images/location_gippsland.jpg';
+import blueMountainsImage from './images/location_blue_mountains.jpg';
+import townsvilleImage from './images/location_townsville.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -52,17 +52,17 @@ const SectionLocations = props => {
       <div className={css.locations}>
         {locationLink(
           'Gippsland',
-          helsinkiImage,
+          gippslandImage,
           'address=Gippsland%20Centre%2C%20Cunninghame%20St.%2C%20Sale%2C%20Victoria%203850%2C%20Australia&bounds=-37.5286174%2C147.23426468%2C-38.65185595%2C146.5263368&mapSearch=true'
         )}
         {locationLink(
           'Blue Mountains',
-          rovaniemiImage,
+          blueMountainsImage,
           '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
         )}
         {locationLink(
           'Townsville',
-          rukaImage,
+          townsvilleImage,
           '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
         )}
       </div>

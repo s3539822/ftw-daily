@@ -765,7 +765,7 @@
   "SectionHowItWorks.titleLineOne": "Your packing list",
   "SectionHowItWorks.titleLineTwo": "(or how CampWhere works).",
   "SectionLocations.listingsInLocation": "Sites in {location}",
-  "SectionLocations.title": "Explore exotic locations around Australia",
+  "SectionLocations.title": "Explore locations around Australia",
   "SelectMultipleFilter.labelSelected": "{labelText} • {count}",
   "SelectMultipleFilterPlainForm.labelSelected": "{labelText} • {count}",
   "SelectSingleFilter.popupClear": "Clear",

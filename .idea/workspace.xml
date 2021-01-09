@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/containers/ListingPage/SectionViewMaybe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingFeaturesPanel/EditListingFeaturesPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingFeaturesPanel/EditListingFeaturesPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SectionHero/SectionHero.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SectionHero/SectionHero.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_blue_mountains.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_gippsland.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_townsville.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/background-1440.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/background-1440.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ListingPage/SectionHeading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ListingPage/SectionHeading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/EditListingFeaturesForm/EditListingFeaturesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingFeaturesForm/EditListingFeaturesForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/marketplace-custom-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/marketplace-custom-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/marketplaceDefaults.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/marketplaceDefaults.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_helsinki.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_rovaniemi.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_ruka.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/propertySets.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/propertySets.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,10 +37,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/components/SectionLocations/images" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -50,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609215467180</updated>
       <workItem from="1609215468397" duration="14594000" />
-      <workItem from="1610168571096" duration="124000" />
+      <workItem from="1610168571096" duration="1256000" />
     </task>
     <servers />
   </component>
