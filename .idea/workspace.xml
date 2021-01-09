@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_blue_mountains.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_gippsland.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SectionLocations/images/location_townsville.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Logo/campwhere-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/background-1440.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/background-1440.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_helsinki.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_rovaniemi.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/images/location_ruka.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/propertySets.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/propertySets.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Logo/Logo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +29,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Logo" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -45,6 +37,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/Logo" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/SectionLocations/images" />
     </key>
@@ -58,7 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609215467180</updated>
       <workItem from="1609215468397" duration="14594000" />
-      <workItem from="1610168571096" duration="1256000" />
+      <workItem from="1610168571096" duration="2189000" />
     </task>
     <servers />
   </component>
