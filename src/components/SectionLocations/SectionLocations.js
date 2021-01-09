@@ -58,12 +58,12 @@ const SectionLocations = props => {
         {locationLink(
           'Blue Mountains',
           blueMountainsImage,
-          '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
+          '?address=Blue%20Mountains%2C%20New%20South%20Wales%2C%20Australia&bounds=-33.683162092%2C150.491901984%2C-33.7716123495%2C150.260824992'
         )}
         {locationLink(
           'Townsville',
           townsvilleImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          '?address=Townsville%2C%20Queensland%2C%20Australia&bounds=-19.180276014%2C146.866364%2C-19.4133283395%2C146.644110208'
         )}
       </div>
     </div>

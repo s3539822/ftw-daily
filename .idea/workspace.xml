@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Logo/campwhere-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Logo/Logo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/background-1440.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/background-1440.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Logo/campwhere-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Logo/campwhere-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SectionLocations/SectionLocations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default-location-searches.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default-location-searches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/marketplace-custom-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/marketplace-custom-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/marketplaceDefaults.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/marketplaceDefaults.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609215467180</updated>
       <workItem from="1609215468397" duration="14594000" />
-      <workItem from="1610168571096" duration="2189000" />
+      <workItem from="1610168571096" duration="9000000" />
     </task>
     <servers />
   </component>

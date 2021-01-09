@@ -85,9 +85,11 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
+        { key: 'camp-road', label: 'Campsite - Road Access' },
+        { key: 'camp-hike', label: 'Campsite - Hike Access' },
+        { key: 'camp-water', label: 'Campsite - Water Access' },
+        { key: 'caravan', label: 'Caravan Park' },
+        { key: 'mixed', label: 'Mixed Site (Camping & Caravan)' },
         { key: 'other', label: 'Other' },
       ],
     },
@@ -109,36 +111,56 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: 'bbq_facilities',
+          label: 'BBQ facilities',
         },
         {
-          key: 'bathroom',
-          label: 'Bathroom',
+          key: 'cafe',
+          label: 'Cafe',
+        },
+        {
+          key: 'camp_kitchen',
+          label: 'Camp kitchen',
+        },
+        {
+          key: 'clothes_dryer',
+          label: 'Clothes dryer',
+        },
+        {
+          key: 'clothes_line',
+          label: 'Clothes line',
+        },
+        {
+          key: 'clothes_washer',
+          label: 'Clothes washer',
+        },
+        {
+          key: 'dump_station',
+          label: 'Dump station',
+        },
+        {
+          key: 'fire_pit',
+          label: 'Fire pit',
+        },
+        {
+          key: 'free_wifi',
+          label: 'Free Wifi',
+        },
+        {
+          key: 'kids_playground',
+          label: 'Kids playground',
         },
         {
           key: 'swimming_pool',
           label: 'Swimming pool',
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
+          key: 'showers',
+          label: 'Showers',
         },
         {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
-        },
-        {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
-        },
-        {
-          key: 'barbeque',
-          label: 'Barbeque',
-        },
-        {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: 'toilets',
+          label: 'Toilets',
         },
       ],
     },
@@ -151,10 +173,10 @@ export const filters = [
     queryParamNames: ['pub_view'],
     config: {
       options: [
-        { key: 'sea', label: 'Sea view' },
-        { key: 'lake', label: 'Lake view' },
-        { key: 'forest', label: 'Forest view' },
-        { key: 'garden', label: 'Garden view' },
+        { key: 'sea', label: 'Ocean' },
+        { key: 'lake', label: 'Lake' },
+        { key: 'forest', label: 'Forest' },
+        { key: 'garden', label: 'Garden' },
       ],
     },
   }
