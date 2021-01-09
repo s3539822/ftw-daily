@@ -30,6 +30,11 @@ const SectionHeading = props => {
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
+        <div className={css.desktopPerUnit}>
+          {/*<FormattedMessage >*/}
+            From
+          {/*</FormattedMessage>*/}
+        </div>
         <div className={css.desktopPriceValue} title={priceTitle}>
           {formattedPrice}
         </div>
@@ -39,6 +44,9 @@ const SectionHeading = props => {
       </div>
       <div className={css.heading}>
         <h1 className={css.title}>{richTitle}</h1>
+        <div className={css.desktopPerUnit}>
+          Camping & Caravan
+        </div>
         <div className={css.author}>
           {category}
           <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />

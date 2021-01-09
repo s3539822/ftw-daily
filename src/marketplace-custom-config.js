@@ -143,6 +143,21 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'view',
+    label: 'View',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_view'],
+    config: {
+      options: [
+        { key: 'sea', label: 'Sea view' },
+        { key: 'lake', label: 'Lake view' },
+        { key: 'forest', label: 'Forest view' },
+        { key: 'garden', label: 'Garden view' },
+      ],
+    },
+  }
 ];
 
 export const sortConfig = {
