@@ -9,10 +9,16 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
+import {
+  Form,
+  IconSpinner,
+  PrimaryButton,
+  FieldDateRangeInput,
+} from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.module.css';
+import AvailableSeatSelectField from './AvailableSeatSelectField';
 
 const identity = v => v;
 
@@ -55,12 +61,16 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
+    const seats = formValues.values.category
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
 
+    if (seats === undefined)
+      return
+
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate },
+        bookingData: { startDate, endDate, seats },
         listingId,
         isOwnListing,
       });
@@ -143,10 +153,10 @@ export class BookingDatesFormComponent extends Component {
           const bookingData =
             startDate && endDate
               ? {
-                  unitType,
-                  startDate,
-                  endDate,
-                }
+                unitType,
+                startDate,
+                endDate,
+              }
               : null;
 
           const showEstimatedBreakdown =
@@ -220,6 +230,13 @@ export class BookingDatesFormComponent extends Component {
                   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
                 disabled={fetchLineItemsInProgress}
+              />
+
+              <AvailableSeatSelectField
+                id="category"
+                name="category"
+                intl={intl}
+                availableSeats={2}
               />
 
               {bookingInfoMaybe}
