@@ -235,6 +235,7 @@ export class BookingDatesFormComponent extends Component {
               <AvailableSeatSelectField
                 id="category"
                 name="category"
+                useMobileMargins
                 intl={intl}
                 availableSeats={2}
               />
