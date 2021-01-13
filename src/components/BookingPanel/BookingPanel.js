@@ -71,6 +71,8 @@ const BookingPanel = props => {
     fetchLineItemsError,
   } = props;
 
+  console.log(listing)
+
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
