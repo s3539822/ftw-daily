@@ -5,7 +5,7 @@ const { Money } = types;
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
-const PROVIDER_COMMISSION_PERCENTAGE = -15;
+const PROVIDER_COMMISSION_PERCENTAGE = -10;
 
 /** Returns collection of lineItems (max 50)
  *
@@ -44,9 +44,8 @@ exports.transactionLineItems = (listing, bookingData) => {
   const booking = {
     code: bookingUnitType,
     unitPrice,
-    units: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
+    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
     includeFor: ['customer', 'provider'],
-    seats: 2,
   };
 
   const providerCommission = {
