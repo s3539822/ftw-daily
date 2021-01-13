@@ -25,7 +25,7 @@ const identity = v => v;
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null };
+    this.state = { focusedInput: null, leastSiteAvail: Infinity };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -64,6 +64,20 @@ export class BookingDatesFormComponent extends Component {
     const seats = formValues.values.category
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
+
+    const time = this.props.timeSlots
+
+    if (time !== undefined && time !== null && startDate !== undefined && endDate !== undefined) {
+      const earlyStart = console.log(moment(startDate).subtract(2,'h'))
+
+      time.map((value) => {
+        if (moment(value.attributes.start).isBetween(earlyStart, endDate)) {
+
+          if (value.attributes.seats < this.state.leastSiteAvail)
+            this.state.leastSiteAvail = value.attributes.seats
+        }
+      })
+    }
 
     if (seats === undefined)
       return
@@ -237,7 +251,7 @@ export class BookingDatesFormComponent extends Component {
                 name="category"
                 useMobileMargins
                 intl={intl}
-                availableSeats={2}
+                availableSeats={this.state.leastSiteAvail}
               />
 
               {bookingInfoMaybe}

@@ -17,6 +17,9 @@ const AvailableSeatSelectField = props => {
   );
 
   const options = () => {
+    if (availableSeats === Infinity)
+      return
+
     const list = []
 
     for (let i = 1; i<=availableSeats; i++) {
