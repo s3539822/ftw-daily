@@ -22,17 +22,15 @@ const LineItemBasePriceMaybe = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  console.log(unitPurchase)
-
-  const seats = unitPurchase ? unitPurchase.seats : null;
-  const quantity = unitPurchase ? unitPurchase.units.toString() : null;
+  const units = unitPurchase ? unitPurchase.units.toString() : null;
+  const seats = unitPurchase ? unitPurchase.seats.toString() : null;
   const unitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
   const total = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
 
-  return quantity && total ? (
+  return units && total ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
-        <FormattedMessage id={translationKey} values={{ unitPrice, quantity, seats }} />
+        <FormattedMessage id={translationKey} values={{ unitPrice, units, seats }} />
       </span>
       <span className={css.itemValue}>{total}</span>
     </div>

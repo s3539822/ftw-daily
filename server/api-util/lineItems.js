@@ -29,7 +29,7 @@ const PROVIDER_COMMISSION_PERCENTAGE = -15;
  */
 exports.transactionLineItems = (listing, bookingData) => {
   const unitPrice = listing.attributes.price;
-  const { startDate, endDate } = bookingData;
+  const { startDate, endDate, seats } = bookingData;
 
   /**
    * If you want to use pre-defined component and translations for printing the lineItems base price for booking,
@@ -46,7 +46,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     unitPrice,
     units: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
     includeFor: ['customer', 'provider'],
-    seats: 2,
+    seats: seats,
   };
 
   const providerCommission = {
