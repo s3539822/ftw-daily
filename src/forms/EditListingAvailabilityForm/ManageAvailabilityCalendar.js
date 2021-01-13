@@ -326,7 +326,7 @@ class ManageAvailabilityCalendar extends Component {
       return;
     } else if (isBlocked) {
       // Unblock the date (seats = 1)
-      this.onDayAvailabilityChange(date, 1, exceptions);
+      this.onDayAvailabilityChange(date, 2, exceptions);
     } else {
       // Block the date (seats = 0)
       this.onDayAvailabilityChange(date, 0, exceptions);
