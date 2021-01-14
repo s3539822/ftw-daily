@@ -395,9 +395,6 @@ export class ListingPageComponent extends Component {
         </span>
       ) : null;
 
-    console.log(timeSlots)
-
-
     return (
       <Page
         title={schemaTitle}
