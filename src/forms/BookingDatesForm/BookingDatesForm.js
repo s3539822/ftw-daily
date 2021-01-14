@@ -42,6 +42,8 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
+    console.log(e)
+    const seats = e.category
     const { startDate, endDate } = e.bookingDates || {};
     if (!startDate) {
       e.preventDefault();
@@ -49,6 +51,8 @@ export class BookingDatesFormComponent extends Component {
     } else if (!endDate) {
       e.preventDefault();
       this.setState({ focusedInput: END_DATE });
+    } else if (!seats) {
+      e.preventDefault();
     } else {
       this.props.onSubmit(e);
     }
@@ -68,7 +72,7 @@ export class BookingDatesFormComponent extends Component {
     const time = this.props.timeSlots
 
     if (time !== undefined && time !== null && startDate !== undefined && endDate !== undefined) {
-      const earlyStart = console.log(moment(startDate).subtract(2,'h'))
+      const earlyStart = moment(startDate).subtract(2,'h')
 
       time.map((value) => {
         if (moment(value.attributes.start).isBetween(earlyStart, endDate)) {

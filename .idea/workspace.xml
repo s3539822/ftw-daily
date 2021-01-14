@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BookingPanel/BookingPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookingPanel/BookingPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/BookingDatesForm/AvailableSeatSelectField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/BookingDatesForm/AvailableSeatSelectField.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/BookingDatesForm/EstimatedBreakdownMaybe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/BookingDatesForm/EstimatedBreakdownMaybe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,5 +74,17 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js</url>
+          <line>698</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

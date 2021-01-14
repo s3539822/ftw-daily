@@ -55,6 +55,7 @@ import {
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.module.css';
+import { deserialize } from '../../util/api';
 
 const STORAGE_KEY = 'CheckoutPage';
 
@@ -134,14 +135,22 @@ export class CheckoutPageComponent extends Component {
    */
   loadInitialData() {
     const {
-      bookingData,
-      bookingDates,
-      listing,
       transaction,
       fetchSpeculatedTransaction,
       fetchStripeCustomer,
       history,
     } = this.props;
+
+    const {
+      bookingData,
+      bookingDates,
+      listing,
+    } = deserialize(window.sessionStorage.CheckoutPage)
+
+    console.log(transaction)
+    console.log(fetchSpeculatedTransaction)
+    console.log(fetchStripeCustomer)
+    console.log(deserialize(window.sessionStorage.CheckoutPage))
 
     // Fetch currentUser with stripeCustomer entity
     // Note: since there's need for data loading in "componentWillMount" function,
@@ -583,6 +592,7 @@ export class CheckoutPageComponent extends Component {
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
     const txBooking = ensureBooking(tx.booking);
+
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
