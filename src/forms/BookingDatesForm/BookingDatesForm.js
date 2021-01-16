@@ -42,8 +42,7 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
-    console.log(e)
-    const seats = e.category
+    const seats = e.seats
     const { startDate, endDate } = e.bookingDates || {};
     if (!startDate) {
       e.preventDefault();
@@ -65,7 +64,7 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-    const seats = formValues.values.category
+    const seats = formValues.values.seats
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
 
@@ -251,8 +250,8 @@ export class BookingDatesFormComponent extends Component {
               />
 
               <AvailableSeatSelectField
-                id="category"
-                name="category"
+                id="seats"
+                name="seats"
                 useMobileMargins
                 intl={intl}
                 availableSeats={this.state.leastSiteAvail}

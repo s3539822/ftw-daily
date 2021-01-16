@@ -111,10 +111,6 @@ export class ListingPageComponent extends Component {
 
     const { bookingDates, ...bookingData } = values;
 
-    console.log(values)
-    console.log(bookingDates)
-    console.log(bookingData)
-
     const initialValues = {
       listing,
       bookingData,
