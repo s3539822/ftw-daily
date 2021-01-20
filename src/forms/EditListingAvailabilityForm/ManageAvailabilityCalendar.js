@@ -267,6 +267,8 @@ class ManageAvailabilityCalendar extends Component {
     const { availabilityPlan, listingId } = this.props;
     const { start, end } = dateStartAndEndInUTC(date);
 
+    this.props.updateSeats(seats)
+
     const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
     const seatsFromPlan = planEntries.find(
       weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]

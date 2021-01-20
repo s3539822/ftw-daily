@@ -9,8 +9,6 @@ module.exports = (req, res) => {
   const sdk = getSdk(req, res);
   let lineItems = null;
 
-  console.log(bookingData)
-
   sdk.listings
     .show({ id: listingId })
     .then(listingResponse => {

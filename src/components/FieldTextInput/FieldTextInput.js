@@ -83,7 +83,7 @@ class FieldTextInputComponent extends Component {
     return (
       <div className={classes}>
         {label ? <label htmlFor={id}>{label}</label> : null}
-        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} />}
+        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps}/>}
         <ValidationError fieldMeta={fieldMeta} />
       </div>
     );
@@ -143,8 +143,9 @@ class FieldTextInput extends Component {
     }
   }
 
+
   render() {
-    return <Field component={FieldTextInputComponent} {...this.props} />;
+    return <Field component={FieldTextInputComponent} {...this.props}/>;
   }
 }
 
