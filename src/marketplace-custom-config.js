@@ -179,7 +179,22 @@ export const filters = [
         { key: 'garden', label: 'Garden' },
       ],
     },
-  }
+  },
+  {
+    id: 'capacity',
+    label: 'Capacity',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_capacity'],
+    config: {
+      options: [
+        { key: '1to3', label: '1 to 3' },
+        { key: '4to6', label: '4 to 6' },
+        { key: '7to9', label: '7 to 9' },
+        { key: '10plus', label: '10 plus' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {
