@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/EditListingCapacityPanel/EditListingCapacityPanel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/EditListingCapacityPanel/EditListingCapacityPanel.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/forms/EditListingCapacityForm/EditListingCapacityForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/forms/EditListingCapacityForm/EditListingCapacityForm.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/initiate-privileged.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/initiate-privileged.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BookingBreakdown/LineItemBasePriceMaybe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookingBreakdown/LineItemBasePriceMaybe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingAvailabilityPanel/EditListingAvailabilityPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingAvailabilityPanel/EditListingAvailabilityPanel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/EditListingPricingPanel/EditListingPricingPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingPricingPanel/EditListingPricingPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizardTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizardTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.duck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.duck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/marketplace-custom-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/marketplace-custom-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/types.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
