@@ -9,8 +9,6 @@ module.exports = (req, res) => {
   const sdk = getSdk(req, res);
   let lineItems = null;
 
-  console.log(bookingData)
-
   sdk.listings
     .show({ id: listingId })
     .then(listingResponse => {
@@ -30,8 +28,6 @@ module.exports = (req, res) => {
           lineItems,
         },
       };
-      if (typeof body.params.seats !== 'number')
-        body.params.seats = parseInt(body.params.seats, 10)
 
       if (isSpeculative) {
         return trustedSdk.transactions.initiateSpeculative(body, queryParams);

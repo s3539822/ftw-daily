@@ -175,10 +175,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
-    seats: parseInt(orderParams.seats, 10),
   };
-
-  console.log(bookingData)
 
   const bodyParams = isTransition
     ? {
@@ -315,7 +312,6 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
-    seats: parseInt(orderParams.seats, 10),
   };
 
   const params = {
@@ -350,12 +346,11 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
   };
 
   const handleError = e => {
-    const { listingId, bookingStart, bookingEnd, seats } = params;
+    const { listingId, bookingStart, bookingEnd } = params;
     log.error(e, 'speculate-transaction-failed', {
       listingId: listingId.uuid,
       bookingStart,
       bookingEnd,
-      seats,
     });
     return dispatch(speculateTransactionError(storableError(e)));
   };

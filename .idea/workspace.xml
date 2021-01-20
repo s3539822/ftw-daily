@@ -5,24 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/EditListingCapacityPanel/EditListingCapacityPanel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/EditListingCapacityPanel/EditListingCapacityPanel.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/forms/EditListingCapacityForm/EditListingCapacityForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/forms/EditListingCapacityForm/EditListingCapacityForm.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/initiate-privileged.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/initiate-privileged.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BookingBreakdown/LineItemBasePriceMaybe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookingBreakdown/LineItemBasePriceMaybe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingAvailabilityPanel/EditListingAvailabilityPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingAvailabilityPanel/EditListingAvailabilityPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingPricingPanel/EditListingPricingPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingPricingPanel/EditListingPricingPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizardTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditListingWizard/EditListingWizardTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.duck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.duck.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/marketplace-custom-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/marketplace-custom-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ListingPage/ListingPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms/EditListingCapacityForm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Logo" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -52,7 +39,6 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/forms/EditListingCapacityForm" />
       <recent name="$PROJECT_DIR$/src/components/Logo" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/SectionLocations/images" />
@@ -71,7 +57,6 @@
       <workItem from="1610238182727" duration="820000" />
       <workItem from="1610348231936" duration="2439000" />
       <workItem from="1610363069543" duration="13118000" />
-      <workItem from="1611041051126" duration="10670000" />
     </task>
     <servers />
   </component>
@@ -95,7 +80,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js</url>
-          <line>693</line>
+          <line>698</line>
+          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

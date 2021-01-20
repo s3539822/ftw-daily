@@ -53,16 +53,9 @@ const EditListingPricingPanel = props => {
           price,
           publicData: { cleaningFee: { amount: 2000, currency: 'USD' } },
         };
-        console.log(values)
-        console.log(updatedValues)
         onSubmit(updatedValues);
       }}
-      onChange={onChange=> {
-
-        console.log(onChange)
-        onChange
-      }
-      }
+      onChange={onChange}
       saveActionMsg={submitButtonText}
       disabled={disabled}
       ready={ready}

@@ -23,7 +23,7 @@ const LineItemBasePriceMaybe = props => {
   );
 
   const units = unitPurchase ? unitPurchase.units.toString() : null;
-  const seats = unitPurchase ? parseInt(unitPurchase.seats, 10) : null;
+  const seats = unitPurchase ? unitPurchase.seats.toString() : null;
   const unitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
   const total = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
 

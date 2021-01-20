@@ -74,8 +74,8 @@ const paymentFlow = (selectedPaymentMethod, saveAfterOnetimePayment) => {
   return selectedPaymentMethod === 'defaultCard'
     ? USE_SAVED_CARD
     : saveAfterOnetimePayment
-      ? PAY_AND_SAVE_FOR_LATER_USE
-      : ONETIME_PAYMENT;
+    ? PAY_AND_SAVE_FOR_LATER_USE
+    : ONETIME_PAYMENT;
 };
 
 const initializeOrderPage = (initialValues, routes, dispatch) => {
@@ -90,8 +90,8 @@ const checkIsPaymentExpired = existingTransaction => {
   return txIsPaymentExpired(existingTransaction)
     ? true
     : txIsPaymentPending(existingTransaction)
-      ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
-      : false;
+    ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
+    : false;
 };
 
 export class CheckoutPageComponent extends Component {
@@ -135,14 +135,22 @@ export class CheckoutPageComponent extends Component {
    */
   loadInitialData() {
     const {
-      bookingData,
-      bookingDates,
-      listing,
       transaction,
       fetchSpeculatedTransaction,
       fetchStripeCustomer,
       history,
     } = this.props;
+
+    const {
+      bookingData,
+      bookingDates,
+      listing,
+    } = deserialize(window.sessionStorage.CheckoutPage)
+
+    console.log(transaction)
+    console.log(fetchSpeculatedTransaction)
+    console.log(fetchStripeCustomer)
+    console.log(deserialize(window.sessionStorage.CheckoutPage))
 
     // Fetch currentUser with stripeCustomer entity
     // Note: since there's need for data loading in "componentWillMount" function,
@@ -184,7 +192,6 @@ export class CheckoutPageComponent extends Component {
       const listingId = pageData.listing.id;
       const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
-      const { seats } = pageData.bookingData;
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
@@ -199,7 +206,6 @@ export class CheckoutPageComponent extends Component {
           listingId,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
-          seats: seats
         },
         transactionId
       );
@@ -291,11 +297,11 @@ export class CheckoutPageComponent extends Component {
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
-            payment_method: {
-              billing_details: billingDetails,
-              card: card,
-            },
-          }
+              payment_method: {
+                billing_details: billingDetails,
+                card: card,
+              },
+            }
           : {};
 
       const params = {
@@ -382,7 +388,6 @@ export class CheckoutPageComponent extends Component {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
-      seats: tx.booking.attributes.seats,
       ...optionalPaymentParams,
     };
 
@@ -415,15 +420,15 @@ export class CheckoutPageComponent extends Component {
     const addressMaybe =
       addressLine1 && postal
         ? {
-          address: {
-            city: city,
-            country: country,
-            line1: addressLine1,
-            line2: addressLine2,
-            postal_code: postal,
-            state: state,
-          },
-        }
+            address: {
+              city: city,
+              country: country,
+              line1: addressLine1,
+              line2: addressLine2,
+              postal_code: postal,
+              state: state,
+            },
+          }
         : {};
     const billingDetails = {
       name,
@@ -726,8 +731,8 @@ export class CheckoutPageComponent extends Component {
     const unitTranslationKey = isNightly
       ? 'CheckoutPage.perNight'
       : isDaily
-        ? 'CheckoutPage.perDay'
-        : 'CheckoutPage.perUnit';
+      ? 'CheckoutPage.perDay'
+      : 'CheckoutPage.perUnit';
 
     const price = currentListing.attributes.price;
     const formattedPrice = formatMoney(intl, price);
