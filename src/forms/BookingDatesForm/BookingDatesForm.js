@@ -11,6 +11,7 @@ import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import AvailableSeatSelectField from './AvailableSeatSelectField';
 
 import css from './BookingDatesForm.module.css';
 
@@ -78,9 +79,10 @@ export class BookingDatesFormComponent extends Component {
 
     if (seats === undefined)
       return
+
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate },
+        bookingData: { startDate, endDate, seats },
         listingId,
         isOwnListing,
       });
