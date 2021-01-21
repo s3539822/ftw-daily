@@ -36,7 +36,7 @@ const serialize = data => {
   return transit.write(data, { typeHandlers, verbose: config.sdk.transitVerbose });
 };
 
-const deserialize = str => {
+export const deserialize = str => {
   return transit.read(str, { typeHandlers });
 };
 

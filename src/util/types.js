@@ -247,6 +247,7 @@ propTypes.booking = shape({
     displayStart: instanceOf(Date),
     displayEnd: instanceOf(Date),
     state: oneOf(BOOKING_STATES),
+    seats: number,
   }),
 });
 

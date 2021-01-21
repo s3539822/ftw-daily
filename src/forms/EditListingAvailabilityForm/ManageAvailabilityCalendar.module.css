@@ -393,3 +393,10 @@
     }
   }
 }
+
+.calendarWrapper {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}

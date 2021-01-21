@@ -1,11 +1,12 @@
 import React from 'react';
+import classNames from 'classnames'
 import { required } from '../../util/validators';
 import { FieldSelect } from '../../components';
 
 import css from './BookingDatesForm.module.css';
 
 const AvailableSeatSelectField = props => {
-  const { name, id, availableSeats, intl } = props;
+  const { name, id, availableSeats, intl, useMobileMargins } = props;
   const categoryLabel = intl.formatMessage({
     id: 'AvailableSeatSelectField.categoryLabel',
   });
@@ -16,6 +17,9 @@ const AvailableSeatSelectField = props => {
   );
 
   const options = () => {
+    if (availableSeats === Infinity)
+      return
+
     const list = []
 
     for (let i = 1; i<=availableSeats; i++) {
@@ -31,7 +35,9 @@ const AvailableSeatSelectField = props => {
 
   return (
     <FieldSelect
-      className={css.category}
+      className={classNames(css.category, {
+        [css.mobileMargins]: useMobileMargins,
+      })}
       name={name}
       id={id}
       label={"Number of Sites"}

@@ -25,7 +25,7 @@ const identity = v => v;
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null };
+    this.state = { focusedInput: null, leastSiteAvail: Infinity };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -42,6 +42,7 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
+    const seats = e.seats
     const { startDate, endDate } = e.bookingDates || {};
     if (!startDate) {
       e.preventDefault();
@@ -49,6 +50,8 @@ export class BookingDatesFormComponent extends Component {
     } else if (!endDate) {
       e.preventDefault();
       this.setState({ focusedInput: END_DATE });
+    } else if (!seats) {
+      e.preventDefault();
     } else {
       this.props.onSubmit(e);
     }
@@ -61,9 +64,23 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-    const seats = formValues.values.category
+    const seats = formValues.values.seats
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
+
+    const time = this.props.timeSlots
+
+    if (time !== undefined && time !== null && startDate !== undefined && endDate !== undefined) {
+      const earlyStart = moment(startDate).subtract(2,'h')
+
+      time.map((value) => {
+        if (moment(value.attributes.start).isBetween(earlyStart, endDate)) {
+
+          if (value.attributes.seats < this.state.leastSiteAvail)
+            this.state.leastSiteAvail = value.attributes.seats
+        }
+      })
+    }
 
     if (seats === undefined)
       return
@@ -233,10 +250,11 @@ export class BookingDatesFormComponent extends Component {
               />
 
               <AvailableSeatSelectField
-                id="category"
-                name="category"
+                id="seats"
+                name="seats"
+                useMobileMargins
                 intl={intl}
-                availableSeats={2}
+                availableSeats={this.state.leastSiteAvail}
               />
 
               {bookingInfoMaybe}
