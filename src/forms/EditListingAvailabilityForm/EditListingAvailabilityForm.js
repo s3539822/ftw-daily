@@ -53,6 +53,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   availability={availability}
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
+
                 />
               </div>
 

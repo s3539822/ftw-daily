@@ -22,7 +22,8 @@ const LineItemBasePriceMaybe = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  const quantity = unitPurchase ? unitPurchase.quantity.toString() : null;
+  const units = unitPurchase ? unitPurchase.units.toString() : null;
+  const seats = unitPurchase ? parseInt(unitPurchase.seats, 10) : null;
   const unitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
   const total = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
 
