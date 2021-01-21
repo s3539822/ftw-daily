@@ -91,7 +91,7 @@ class FieldTextInputComponent extends Component {
     return (
       <div className={classes}>
         {label ? <label id={labelId} htmlFor={id}>{label}</label> : null}
-        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} onChange={onSeatChange}/>}
+        {isTextarea ? <ExpandingTextarea {...inputProps} /> : onSeatChange ? <input {...inputProps} onChange={onSeatChange}/> : <input {...inputProps}/>}
         <ValidationError fieldMeta={fieldMeta} />
       </div>
     );

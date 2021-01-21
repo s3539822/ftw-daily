@@ -223,6 +223,7 @@ class ManageAvailabilityCalendar extends Component {
       focused: true,
       date: null,
       seats: "-",
+      seatError: null,
     };
 
     this.onSeatChange = this.onSeatChange.bind(this);
@@ -333,6 +334,7 @@ class ManageAvailabilityCalendar extends Component {
 
   onDateChange(date) {
     this.setState({ date });
+    this.setState({seatError: null})
 
     const { availability } = this.props;
     const calendar = availability.calendar;
@@ -353,14 +355,23 @@ class ManageAvailabilityCalendar extends Component {
   onSeatChange(e) {
     e.preventDefault()
 
-    //WILL NEED ERROR STRING
-    if (!(/^-?\d+$/.test(e.target.value)) || parseInt(e.target.value, 10)<0)
-      return
+    this.setState({seatError: null})
 
-    const seats = parseInt(e.target.value, 10)
     const date = this.state.date
+    const seats = e.target.value
 
-    console.log(seats, typeof seats, date)
+    if (date === null) {
+      this.setState({seatError: "No date selected"})
+      return
+    }
+
+    //WILL NEED ERROR STRING
+    if (!(/^-?\d+$/.test(seats)) || parseInt(seats, 10)<0) {
+      this.setState({seatError: "Enter a valid number"})
+      return;
+    }
+
+    const seatsNumber = parseInt(seats, 10)
 
     const { availabilityPlan, availability } = this.props;
     const calendar = availability.calendar;
@@ -378,9 +389,8 @@ class ManageAvailabilityCalendar extends Component {
       // Cannot allow or block a reserved or a past date or inProgress
       return;
     } else {
-      // Block the date (seats = 0)
-      console.log("here98")
-      this.onDayAvailabilityChange(date, seats, exceptions);
+      //Set the new seat availability
+      this.onDayAvailabilityChange(date, seatsNumber, exceptions);
     }
   }
 
@@ -526,6 +536,7 @@ class ManageAvailabilityCalendar extends Component {
             defaultValue={this.state.seats}
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
+            customErrorText={this.state.seatError}
           />
         </div>
       </div>
