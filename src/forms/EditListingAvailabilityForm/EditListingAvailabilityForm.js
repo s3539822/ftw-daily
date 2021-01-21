@@ -5,11 +5,10 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { Form, Button, FieldTextInput } from '../../components';
+import { Form, Button } from '../../components';
 
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
 import css from './EditListingAvailabilityForm.module.css';
-import { ensureDayAvailabilityPlan } from '../../util/data';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
@@ -46,11 +45,6 @@ export class EditListingAvailabilityFormComponent extends Component {
           const submitInProgress = updateInProgress;
           const submitDisabled = invalid || disabled || submitInProgress;
 
-          this.state = {
-            seats: 5,
-            label: "dsgffds"
-          }
-
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
@@ -59,20 +53,9 @@ export class EditListingAvailabilityFormComponent extends Component {
                   availability={availability}
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
-                  updateSeats={(seats) => {
-                    console.log(seats)
-                    /*this.setState();*/
-                    this.state.seats = seats
-                    document.getElementById(".input1").value = seats;
-                    document.getElementById(".input1").innerHTML = "GEF";
-                    console.log(document.getElementById(".input1").innerHTML);
-                    console.log(document.getElementById(".input1").innerText);
-                    this.setState({label: "fdsdsf"})
-                  }}
+
                 />
               </div>
-              {/*<FieldTextInput type="text" id={`.input1`} name="input1" label="Seats:" isUncontrolled={true} defaultValue={this.state.seats}/>*/}
-              <FieldTextInput type="text" id={`.input1`} name="input1" label={this.state.label} isUncontrolled={true} defaultValue={this.state.seats}/>
 
               <Button
                 className={css.submitButton}

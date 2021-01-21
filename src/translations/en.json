@@ -169,6 +169,7 @@
   "EditListingAvailabilityForm.blockedDay": "Not available",
   "EditListingAvailabilityForm.bookedDay": "Booked",
   "EditListingAvailabilityForm.updateFailed": "Failed to update listing. Please try again.",
+  "EditListingAvailabilityForm.seatsDefaultLabel": "No date selected",
   "EditListingAvailabilityPanel.title": "Edit the availability of {listingTitle}",
   "EditListingAvailabilityPanel.createListingTitle": "When is it available?",
   "EditListingCapacityForm.capacityRequired": "You need to select a capacity for your site.",

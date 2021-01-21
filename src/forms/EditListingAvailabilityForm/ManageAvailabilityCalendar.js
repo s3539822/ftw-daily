@@ -17,7 +17,7 @@ import {
 } from '../../util/data';
 import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
-import { IconArrowHead, IconSpinner } from '../../components';
+import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
 
@@ -199,6 +199,14 @@ const makeDraftException = (exceptions, start, end, seats) => {
   return { availabilityException: draft };
 };
 
+const dateString = (date) => {
+  const res = date._d.toString().split(" ");
+
+  return "Seats on: " + res[0] + " " + res[1] + " " + res[2] + ", " + res[3]
+}
+
+
+
 ////////////////////////////////
 // ManageAvailabilityCalendar //
 ////////////////////////////////
@@ -214,8 +222,10 @@ class ManageAvailabilityCalendar extends Component {
       currentMonth: moment().startOf('month'),
       focused: true,
       date: null,
+      seats: "-",
     };
 
+    this.updateSeatsSelector = this.updateSeatsSelector.bind(this);
     this.fetchMonthData = this.fetchMonthData.bind(this);
     this.onDayAvailabilityChange = this.onDayAvailabilityChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
@@ -228,6 +238,15 @@ class ManageAvailabilityCalendar extends Component {
     this.fetchMonthData(this.state.currentMonth);
     // Fetch next month too.
     this.fetchMonthData(nextMonthFn(this.state.currentMonth));
+  }
+
+  updateSeatsSelector(date, seats) {
+    document.getElementById(".input1Label").innerHTML = dateString(date);
+
+    if (seats === 0)
+      document.getElementById(".input1").value = "Not available";
+    else
+      document.getElementById(".input1").value = seats;
   }
 
   fetchMonthData(monthMoment) {
@@ -267,12 +286,16 @@ class ManageAvailabilityCalendar extends Component {
     const { availabilityPlan, listingId } = this.props;
     const { start, end } = dateStartAndEndInUTC(date);
 
-    this.props.updateSeats(seats)
-
     const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
     const seatsFromPlan = planEntries.find(
       weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]
     ).seats;
+
+    /*this.props.updateSeats(date, seats)*/
+    /*this.onDateChange(date, seats)*/
+
+    this.updateSeatsSelector(date, seats)
+
 
     const currentException = findException(exceptions, date);
     const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
@@ -283,15 +306,19 @@ class ManageAvailabilityCalendar extends Component {
       const id = currentException.availabilityException.id;
       const isResetToPlanSeats = seatsFromPlan === seats;
 
+      console.log("here1")
+
       if (isResetToPlanSeats) {
         // Delete the exception, if the exception is redundant
         // (it has the same content as what user has in the plan).
+        console.log("here2")
         this.props.availability.onDeleteAvailabilityException({
           id,
           currentException: exception,
           seats: seatsFromPlan,
         });
       } else {
+        console.log("here3")
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
@@ -302,6 +329,7 @@ class ManageAvailabilityCalendar extends Component {
           });
       }
     } else {
+      console.log("here4")
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params);
@@ -407,64 +435,82 @@ class ManageAvailabilityCalendar extends Component {
           this.dayPickerWrapper = c;
         }}
       >
-        {width > 0 ? (
-          <div style={{ width: `${calendarGridWidth}px` }}>
-            <DayPickerSingleDateController
-              {...rest}
-              ref={c => {
-                this.dayPicker = c;
-              }}
-              numberOfMonths={1}
-              navPrev={<IconArrowHead direction="left" />}
-              navNext={<IconArrowHead direction="right" />}
-              weekDayFormat="ddd"
-              daySize={daySize}
-              renderDayContents={renderDayContents(calendar, availabilityPlan)}
-              focused={focused}
-              date={date}
-              onDateChange={this.onDateChange}
-              onFocusChange={this.onFocusChange}
-              onPrevMonthClick={() => this.onMonthClick(prevMonthFn)}
-              onNextMonthClick={() => this.onMonthClick(nextMonthFn)}
-              hideKeyboardShortcutsPanel
-              horizontalMonthPadding={9}
-              renderMonthElement={({ month }) => (
-                <div className={css.monthElement}>
-                  <span className={css.monthString}>{month.format(monthFormat)}</span>
-                  {!isMonthDataFetched ? <IconSpinner rootClassName={css.monthInProgress} /> : null}
-                </div>
-              )}
-            />
-          </div>
-        ) : null}
-        <div className={css.legend} style={{ width: `${calendarGridWidth}px` }}>
-          <div className={css.legendRow}>
-            <span className={css.legendAvailableColor} />
-            <span className={css.legendText}>
+        <div className={css.calendarWrapper}>
+          {width > 0 ? (
+            <div style={{ width: `${calendarGridWidth}px` }}>
+              <DayPickerSingleDateController
+                {...rest}
+                ref={c => {
+                  this.dayPicker = c;
+                }}
+                numberOfMonths={1}
+                navPrev={<IconArrowHead direction="left" />}
+                navNext={<IconArrowHead direction="right" />}
+                weekDayFormat="ddd"
+                daySize={daySize}
+                renderDayContents={renderDayContents(calendar, availabilityPlan)}
+                focused={focused}
+                date={date}
+                onDateChange={this.onDateChange}
+                onFocusChange={this.onFocusChange}
+                onPrevMonthClick={() => this.onMonthClick(prevMonthFn)}
+                onNextMonthClick={() => this.onMonthClick(nextMonthFn)}
+                hideKeyboardShortcutsPanel
+                horizontalMonthPadding={9}
+                renderMonthElement={({ month }) => (
+                  <div className={css.monthElement}>
+                    <span className={css.monthString}>{month.format(monthFormat)}</span>
+                    {!isMonthDataFetched ? <IconSpinner rootClassName={css.monthInProgress} /> : null}
+                  </div>
+                )}
+              />
+            </div>
+          ) : null}
+          <div className={css.legend} style={{ width: `${calendarGridWidth}px` }}>
+            <div className={css.legendRow}>
+              <span className={css.legendAvailableColor} />
+              <span className={css.legendText}>
               <FormattedMessage id="EditListingAvailabilityForm.availableDay" />
             </span>
-          </div>
-          <div className={css.legendRow}>
-            <span className={css.legendBlockedColor} />
-            <span className={css.legendText}>
+            </div>
+            <div className={css.legendRow}>
+              <span className={css.legendBlockedColor} />
+              <span className={css.legendText}>
               <FormattedMessage id="EditListingAvailabilityForm.blockedDay" />
             </span>
-          </div>
-          <div className={css.legendRow}>
-            <span className={css.legendReservedColor} />
-            <span className={css.legendText}>
+            </div>
+            <div className={css.legendRow}>
+              <span className={css.legendReservedColor} />
+              <span className={css.legendText}>
               <FormattedMessage id="EditListingAvailabilityForm.bookedDay" />
             </span>
+            </div>
           </div>
+          {fetchExceptionsError && fetchBookingsError ? (
+            <p className={css.error}>
+              <FormattedMessage
+                id="EditListingAvailabilityForm.fetchMonthDataFailed"
+                values={{ month: monthName }}
+              />
+            </p>
+          ) : null}
         </div>
-        {fetchExceptionsError && fetchBookingsError ? (
-          <p className={css.error}>
-            <FormattedMessage
-              id="EditListingAvailabilityForm.fetchMonthDataFailed"
-              values={{ month: monthName }}
-            />
-          </p>
-        ) : null}
+        <div className={css.calendarWrapper}>
+          <FieldTextInput
+            type="text"
+            id={`.input1`}
+            name="input1"
+            label={"No date selected"}
+            labelId={".input1Label"}
+            defaultValue={this.state.seats}
+            isUncontrolled={true}
+            onSeatChange={(e) => {
+              e.preventDefault()
+
+              console.log(e.target.value)
+            }}
+          />
+        </div>
       </div>
     );
   }

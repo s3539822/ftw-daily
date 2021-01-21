@@ -18,9 +18,11 @@ class FieldTextInputComponent extends Component {
       customErrorText,
       id,
       label,
+      labelId,
       input,
       meta,
       onUnmount,
+      onSeatChange,
       isUncontrolled,
       inputRef,
       ...rest
@@ -77,13 +79,19 @@ class FieldTextInputComponent extends Component {
           ...inputWithoutValue,
           ...rest,
         }
-      : { className: inputClasses, id, type, ...refMaybe, ...input, ...rest };
+      : { className: inputClasses,
+          id,
+          type,
+          ...refMaybe,
+          ...input,
+          ...rest
+    };
 
     const classes = classNames(rootClassName || css.root, className);
     return (
       <div className={classes}>
-        {label ? <label htmlFor={id}>{label}</label> : null}
-        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps}/>}
+        {label ? <label id={labelId} htmlFor={id}>{label}</label> : null}
+        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} onChange={onSeatChange}/>}
         <ValidationError fieldMeta={fieldMeta} />
       </div>
     );
