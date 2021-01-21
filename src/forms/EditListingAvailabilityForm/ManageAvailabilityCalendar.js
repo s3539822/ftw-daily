@@ -205,8 +205,6 @@ const dateString = (date) => {
   return "Seats on: " + res[0] + " " + res[1] + " " + res[2] + ", " + res[3]
 }
 
-
-
 ////////////////////////////////
 // ManageAvailabilityCalendar //
 ////////////////////////////////
@@ -355,18 +353,20 @@ class ManageAvailabilityCalendar extends Component {
   onSeatChange(e) {
     e.preventDefault()
 
+    //Reset error string
     this.setState({seatError: null})
 
     const date = this.state.date
     const seats = e.target.value
 
+    //Ensure date is elected
     if (date === null) {
       this.setState({seatError: "No date selected"})
       return
     }
 
-    //WILL NEED ERROR STRING
-    if (!(/^-?\d+$/.test(seats)) || parseInt(seats, 10)<0) {
+    //Ensure seat is a positive integer
+    if (!(/^-?\d+$/.test(seats)) || parseInt(seats, 10) < 0) {
       this.setState({seatError: "Enter a valid number"})
       return;
     }
