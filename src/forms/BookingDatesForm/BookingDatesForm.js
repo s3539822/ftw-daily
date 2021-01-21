@@ -11,6 +11,7 @@ import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import AvailableSeatSelectField from './AvailableSeatSelectField';
 
 import css from './BookingDatesForm.module.css';
 
