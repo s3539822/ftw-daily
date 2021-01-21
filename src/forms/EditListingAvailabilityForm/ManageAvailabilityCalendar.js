@@ -225,6 +225,7 @@ class ManageAvailabilityCalendar extends Component {
       seats: "-",
     };
 
+    this.onSeatChange = this.onSeatChange.bind(this);
     this.updateSeatsSelector = this.updateSeatsSelector.bind(this);
     this.fetchMonthData = this.fetchMonthData.bind(this);
     this.onDayAvailabilityChange = this.onDayAvailabilityChange.bind(this);
@@ -291,12 +292,6 @@ class ManageAvailabilityCalendar extends Component {
       weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]
     ).seats;
 
-    /*this.props.updateSeats(date, seats)*/
-    /*this.onDateChange(date, seats)*/
-
-    this.updateSeatsSelector(date, seats)
-
-
     const currentException = findException(exceptions, date);
     const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
     const exception = currentException || draftException;
@@ -339,12 +334,40 @@ class ManageAvailabilityCalendar extends Component {
   onDateChange(date) {
     this.setState({ date });
 
+    const { availability } = this.props;
+    const calendar = availability.calendar;
+    // This component is for day/night based processes. If time-based process is used,
+    // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
+    const { exceptions = [] } = calendar[monthIdStringInUTC(date)] || {};
+
+    const currentException = findException(exceptions, date);
+    const hasAvailabilityException = currentException && currentException.availabilityException.id;
+
+    if (hasAvailabilityException) {
+      this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
+    } else {
+      this.updateSeatsSelector(date, 1)
+    }
+  }
+
+  onSeatChange(e) {
+    e.preventDefault()
+
+    //WILL NEED ERROR STRING
+    if (!(/^-?\d+$/.test(e.target.value)) || parseInt(e.target.value, 10)<0)
+      return
+
+    const seats = parseInt(e.target.value, 10)
+    const date = this.state.date
+
+    console.log(seats, typeof seats, date)
+
     const { availabilityPlan, availability } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
     const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
-    const { isPast, isBlocked, isBooked, isInProgress } = dateModifiers(
+    const { isPast, isBooked, isInProgress } = dateModifiers(
       availabilityPlan,
       exceptions,
       bookings,
@@ -354,12 +377,10 @@ class ManageAvailabilityCalendar extends Component {
     if (isBooked || isPast || isInProgress) {
       // Cannot allow or block a reserved or a past date or inProgress
       return;
-    } else if (isBlocked) {
-      // Unblock the date (seats = 1)
-      this.onDayAvailabilityChange(date, 2, exceptions);
     } else {
       // Block the date (seats = 0)
-      this.onDayAvailabilityChange(date, 0, exceptions);
+      console.log("here98")
+      this.onDayAvailabilityChange(date, seats, exceptions);
     }
   }
 
@@ -504,11 +525,7 @@ class ManageAvailabilityCalendar extends Component {
             labelId={".input1Label"}
             defaultValue={this.state.seats}
             isUncontrolled={true}
-            onSeatChange={(e) => {
-              e.preventDefault()
-
-              console.log(e.target.value)
-            }}
+            onSeatChange={this.onSeatChange}
           />
         </div>
       </div>
