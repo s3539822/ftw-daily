@@ -25,7 +25,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms/EditListingCapacityForm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Logo" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -33,7 +33,6 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/forms/EditListingCapacityForm" />
       <recent name="$PROJECT_DIR$/src/components/Logo" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/SectionLocations/images" />
@@ -51,8 +50,7 @@
       <workItem from="1610168571096" duration="9598000" />
       <workItem from="1610238182727" duration="820000" />
       <workItem from="1610348231936" duration="2439000" />
-      <workItem from="1610363069543" duration="13118000" />
-      <workItem from="1611041051126" duration="10670000" />
+      <workItem from="1610363069543" duration="1824000" />
     </task>
     <servers />
   </component>
@@ -70,16 +68,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/containers/CheckoutPage/CheckoutPage.js</url>
-          <line>693</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

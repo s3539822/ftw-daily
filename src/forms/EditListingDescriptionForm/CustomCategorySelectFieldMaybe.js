@@ -6,9 +6,6 @@ import css from './EditListingDescriptionForm.module.css';
 
 const CustomCategorySelectFieldMaybe = props => {
   const { name, id, categories, intl } = props;
-
-  console.log(intl)
-
   const categoryLabel = intl.formatMessage({
     id: 'EditListingDescriptionForm.categoryLabel',
   });
