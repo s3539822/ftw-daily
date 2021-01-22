@@ -300,19 +300,15 @@ class ManageAvailabilityCalendar extends Component {
       const id = currentException.availabilityException.id;
       const isResetToPlanSeats = seatsFromPlan === seats;
 
-      console.log("here1")
-
       if (isResetToPlanSeats) {
         // Delete the exception, if the exception is redundant
         // (it has the same content as what user has in the plan).
-        console.log("here2")
         this.props.availability.onDeleteAvailabilityException({
           id,
           currentException: exception,
           seats: seatsFromPlan,
         });
       } else {
-        console.log("here3")
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
@@ -323,7 +319,6 @@ class ManageAvailabilityCalendar extends Component {
           });
       }
     } else {
-      console.log("here4")
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params);
