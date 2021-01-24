@@ -14,6 +14,8 @@ import {
 import css from './ContactPage.module.css';
 import image from '../../assets/background-1440.jpg';
 import { FormattedMessage } from '../../util/reactIntl';
+import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
+import { EnquiryForm } from '../../forms';
 
 const ContactPage = () => {
   const { siteTwitterHandle, siteFacebookPage } = config;
@@ -36,12 +38,22 @@ const ContactPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          {/*<h1 className={css.pageTitle}>
-            <FormattedMessage id="AboutPage.pageTitle" />
+          <h1 className={css.pageTitle}>
+            <FormattedMessage id="ContactPage.pageTitle" />
           </h1>
           <img className={css.coverImage} src={image} alt="CampWhere background." />
 
-          <div className={css.contentWrapper}>
+          <ContactUsForm
+            className={css.enquiryForm}
+            submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
+            listingTitle={title}
+            authorDisplayName={authorDisplayName}
+            sendEnquiryError={sendEnquiryError}
+            onSubmit={onSubmitEnquiry}
+            inProgress={sendEnquiryInProgress}
+          />
+
+          {/*<div className={css.contentWrapper}>
             <div className={css.contentSide}>
               <p>
                 <FormattedMessage id="AboutPage.sideFact" />

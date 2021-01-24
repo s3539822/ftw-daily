@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.example.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forms/EnquiryForm/EnquiryForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EnquiryForm/EnquiryForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms/BookingDatesForm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -36,6 +41,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/forms" />
       <recent name="$PROJECT_DIR$/src/forms/BookingDatesForm" />
       <recent name="$PROJECT_DIR$/src/components/Logo" />
       <recent name="$PROJECT_DIR$/src/assets" />
