@@ -71,9 +71,17 @@ const AboutPage = () => {
               </p>
 
               <p>
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
-                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
+                <FormattedMessage id="AboutPage.callToAction1" />
+
+                <ExternalLink href={siteFacebookPage}>
+                  <FormattedMessage id="AboutPage.callToAction2" />
+                </ExternalLink>
+
+                <FormattedMessage id="AboutPage.callToAction3" />
+
+                <ExternalLink href={siteTwitterPage}>
+                  <FormattedMessage id="AboutPage.callToAction4" />
+                </ExternalLink>.
               </p>
             </div>
           </div>
