@@ -63,11 +63,6 @@ const AboutPage = () => {
 
               <p>
                 <FormattedMessage id="AboutPage.body2Text" />
-                CampWhere offers a platform from to which to promote your business and manage! If you are wanting to If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
               </p>
 
               <p>
