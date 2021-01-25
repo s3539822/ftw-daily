@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, FieldTextInput, IconEnquiry } from '../../components';
+import { Form, PrimaryButton, FieldTextInput, IconEnquiry, Button } from '../../components';
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
@@ -24,6 +24,7 @@ const ContactUsFormComponent = props => (
         intl,
         /*listingTitle,
         authorDisplayName,*/
+        sendActionMsg,
         sendEnquiryError,
       } = fieldRenderProps;
 
@@ -72,15 +73,46 @@ const ContactUsFormComponent = props => (
             placeholder={"Doe"}
             validate={messageRequired}
           />
+          <FieldTextInput
+            className={css.field}
+            type="textarea"
+            name="message"
+            id={formId ? `${formId}.message` : 'message'}
+            label={"Email"}
+            placeholder={"john@doe.com"}
+            validate={messageRequired}
+          />
+          <FieldTextInput
+            className={css.field}
+            type="textarea"
+            name="message"
+            id={formId ? `${formId}.message` : 'message'}
+            label={"Message"}
+            placeholder={"What do you want to say?"}
+            validate={messageRequired}
+            rows={4}
+          />
+
+
+
           <div className={submitButtonWrapperClassName}>
             {sendEnquiryError ? (
               <p className={css.error}>
                 <FormattedMessage id="EnquiryForm.sendEnquiryError" />
               </p>
             ) : null}
-            <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
-              <FormattedMessage id="EnquiryForm.submitButtonText" />
+            <PrimaryButton
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              /*ready={submitReady}*/
+            >
+              {sendActionMsg}
             </PrimaryButton>
+            {/*< type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
+              <FormattedMessage id="EnquiryForm.submitButtonText" />
+            </>*/}
           </div>
         </Form>
       );
@@ -106,6 +138,7 @@ ContactUsFormComponent.propTypes = {
   /*listingTitle: string.isRequired,
   authorDisplayName: string.isRequired,*/
   sendEnquiryError: propTypes.error,
+  sendActionMsg: string.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

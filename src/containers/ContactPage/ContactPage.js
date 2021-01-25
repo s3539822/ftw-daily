@@ -121,6 +121,7 @@ export class ContactPageComponent extends Component {
               sendEnquiryError={sendEnquiryError}
               onSubmit={this.onSubmit}
               inProgress={sendEnquiryInProgress}
+              sendActionMsg={"Send"}
             />
 
             {/*<div className={css.contentWrapper}>
