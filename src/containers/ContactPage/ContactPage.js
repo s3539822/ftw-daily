@@ -29,6 +29,7 @@ import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
 import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
+import { sendInternalEmail } from '../../util/api';
 
 export class ContactPageComponent extends Component {
 
@@ -45,6 +46,12 @@ export class ContactPageComponent extends Component {
 
 
   onSubmit(values) {
+    sendInternalEmail({
+      "Hello": "Hello"
+    })
+      .then(value =>
+        console.log(value)
+      )
     /*const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
     const listingId = new UUID(params.id);
@@ -121,48 +128,7 @@ export class ContactPageComponent extends Component {
               sendEnquiryError={sendEnquiryError}
               onSubmit={this.onSubmit}
               inProgress={sendEnquiryInProgress}
-              sendActionMsg={"Send"}
             />
-
-            {/*<div className={css.contentWrapper}>
-            <div className={css.contentSide}>
-              <p>
-                <FormattedMessage id="AboutPage.sideFact" />
-              </p>
-            </div>
-
-            <div className={css.contentMain}>
-              <h2>
-                <FormattedMessage id="AboutPage.paraMainTitle" />
-              </h2>
-
-              <p>
-                <FormattedMessage id="AboutPage.body1Text" />
-              </p>
-
-              <h3 className={css.subtitle}>
-                <FormattedMessage id="AboutPage.body2Header" />
-              </h3>
-
-              <p>
-                <FormattedMessage id="AboutPage.body2Text" />
-              </p>
-
-              <p>
-                <FormattedMessage id="AboutPage.callToAction1" />
-
-                <ExternalLink href={siteFacebookPage}>
-                  <FormattedMessage id="AboutPage.callToAction2" />
-                </ExternalLink>
-
-                <FormattedMessage id="AboutPage.callToAction3" />
-
-                <ExternalLink href={siteTwitterPage}>
-                  <FormattedMessage id="AboutPage.callToAction4" />
-                </ExternalLink>.
-              </p>
-            </div>
-          </div>*/}
           </LayoutWrapperMain>
 
           <LayoutWrapperFooter>
