@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ValidationError/ValidationError.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ValidationError/ValidationError.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/ContactUsForm/ContactUsForm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

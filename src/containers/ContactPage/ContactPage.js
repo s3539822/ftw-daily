@@ -112,7 +112,7 @@ export class ContactPageComponent extends Component {
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
             <h1 className={css.pageTitle}>
-              <FormattedMessage id='ContactPage.pageTitle' />
+              <FormattedMessage id='ContactUsPage.pageTitle' />
             </h1>
 
             <ContactUsForm

@@ -22,26 +22,50 @@ const ContactUsFormComponent = props => (
         handleSubmit,
         inProgress,
         intl,
-        /*listingTitle,
-        authorDisplayName,*/
-        sendActionMsg,
         sendEnquiryError,
       } = fieldRenderProps;
 
-      /*const messageLabel = intl.formatMessage(
-        {
-          id: 'EnquiryForm.messageLabel',
-        },
-        { authorDisplayName }
-      );
-      const messagePlaceholder = intl.formatMessage(
-        {
-          id: 'EnquiryForm.messagePlaceholder',
-        },
-        { authorDisplayName }
-      );*/
+      const firstNameTitle = intl.formatMessage({
+        id: 'ContactUsForm.firstNameTitle',
+      });
+      const firstNamePlaceholder = intl.formatMessage({
+        id: 'ContactUsForm.firstNamePlaceholder',
+      });
+      const firstNameRequiredMessage = intl.formatMessage({
+        id: 'ContactUsForm.firstNameRequired',
+      });
+      const firstNameRequired = validators.requiredAndNonEmptyString(firstNameRequiredMessage)
+
+      const lastNameTitle = intl.formatMessage({
+        id: 'ContactUsForm.lastNameTitle',
+      });
+      const lastNamePlaceholder = intl.formatMessage({
+        id: 'ContactUsForm.lastNamePlaceholder',
+      });
+      const lastNameRequiredMessage = intl.formatMessage({
+        id: 'ContactUsForm.lastNameRequired',
+      });
+      const lastNameRequired = validators.requiredAndNonEmptyString(lastNameRequiredMessage)
+
+      const emailTitle = intl.formatMessage({
+        id: 'ContactUsForm.emailTitle',
+      });
+      const emailPlaceholder = intl.formatMessage({
+        id: 'ContactUsForm.emailPlaceholder',
+      });
+      const emailRequiredMessage = intl.formatMessage({
+        id: 'ContactUsForm.emailRequired',
+      });
+      const emailRequired = validators.emailFormatValid(emailRequiredMessage)
+
+      const messageTitle = intl.formatMessage({
+        id: 'ContactUsForm.messageTitle',
+      });
+      const messagePlaceholder = intl.formatMessage({
+        id: 'ContactUsForm.messagePlaceholder',
+      });
       const messageRequiredMessage = intl.formatMessage({
-        id: 'EnquiryForm.messageRequired',
+        id: 'ContactUsForm.messageRequired',
       });
       const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
@@ -52,48 +76,43 @@ const ContactUsFormComponent = props => (
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <IconEnquiry className={css.icon} />
-          <h2 className={css.heading}>
-            {/*<FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />*/}
-          </h2>
           <FieldTextInput
             className={css.field}
             type="textarea"
-            name="message"
-            id={formId ? `${formId}.message` : 'message'}
-            label={"First Name"}
-            placeholder={"John"}
-            validate={messageRequired}
+            name="f_name"
+            id={formId ? `${formId}.f_name` : 'f_name'}
+            label={firstNameTitle}
+            placeholder={firstNamePlaceholder}
+            validate={firstNameRequired}
+          />
+          <FieldTextInput
+            className={css.field}
+            type="textarea"
+            name="l_name"
+            id={formId ? `${formId}.l_name` : 'l_name'}
+            label={lastNameTitle}
+            placeholder={lastNamePlaceholder}
+            validate={lastNameRequired}
+          />
+          <FieldTextInput
+            className={css.field}
+            type="textarea"
+            name="email"
+            id={formId ? `${formId}.email` : 'email'}
+            label={emailTitle}
+            placeholder={emailPlaceholder}
+            validate={emailRequired}
           />
           <FieldTextInput
             className={css.field}
             type="textarea"
             name="message"
             id={formId ? `${formId}.message` : 'message'}
-            label={"Last Name"}
-            placeholder={"Doe"}
-            validate={messageRequired}
-          />
-          <FieldTextInput
-            className={css.field}
-            type="textarea"
-            name="message"
-            id={formId ? `${formId}.message` : 'message'}
-            label={"Email"}
-            placeholder={"john@doe.com"}
-            validate={messageRequired}
-          />
-          <FieldTextInput
-            className={css.field}
-            type="textarea"
-            name="message"
-            id={formId ? `${formId}.message` : 'message'}
-            label={"Message"}
-            placeholder={"What do you want to say?"}
+            label={messageTitle}
+            placeholder={messagePlaceholder}
             validate={messageRequired}
             rows={4}
           />
-
-
 
           <div className={submitButtonWrapperClassName}>
             {sendEnquiryError ? (
@@ -108,11 +127,8 @@ const ContactUsFormComponent = props => (
               disabled={submitDisabled}
               /*ready={submitReady}*/
             >
-              {sendActionMsg}
+              <FormattedMessage id="ContactUsForm.submitButtonText" />
             </PrimaryButton>
-            {/*< type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
-              <FormattedMessage id="EnquiryForm.submitButtonText" />
-            </>*/}
           </div>
         </Form>
       );
@@ -135,8 +151,6 @@ ContactUsFormComponent.propTypes = {
 
   inProgress: bool,
 
-  /*listingTitle: string.isRequired,
-  authorDisplayName: string.isRequired,*/
   sendEnquiryError: propTypes.error,
   sendActionMsg: string.isRequired,
 
