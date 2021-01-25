@@ -22,25 +22,25 @@ const ContactUsFormComponent = props => (
         handleSubmit,
         inProgress,
         intl,
-        listingTitle,
-        authorDisplayName,
+        /*listingTitle,
+        authorDisplayName,*/
         sendEnquiryError,
       } = fieldRenderProps;
 
-      const messageLabel = intl.formatMessage(
+      /*const messageLabel = intl.formatMessage(
         {
-          id: 'ContactUsForm.messageLabel',
+          id: 'EnquiryForm.messageLabel',
         },
         { authorDisplayName }
       );
       const messagePlaceholder = intl.formatMessage(
         {
-          id: 'ContactUsForm.messagePlaceholder',
+          id: 'EnquiryForm.messagePlaceholder',
         },
         { authorDisplayName }
-      );
+      );*/
       const messageRequiredMessage = intl.formatMessage({
-        id: 'ContactUsForm.messageRequired',
+        id: 'EnquiryForm.messageRequired',
       });
       const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
@@ -52,15 +52,24 @@ const ContactUsFormComponent = props => (
         <Form className={classes} onSubmit={handleSubmit}>
           <IconEnquiry className={css.icon} />
           <h2 className={css.heading}>
-            <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />
+            {/*<FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />*/}
           </h2>
           <FieldTextInput
             className={css.field}
             type="textarea"
             name="message"
             id={formId ? `${formId}.message` : 'message'}
-            label={messageLabel}
-            placeholder={messagePlaceholder}
+            label={"First Name"}
+            placeholder={"John"}
+            validate={messageRequired}
+          />
+          <FieldTextInput
+            className={css.field}
+            type="textarea"
+            name="message"
+            id={formId ? `${formId}.message` : 'message'}
+            label={"Last Name"}
+            placeholder={"Doe"}
             validate={messageRequired}
           />
           <div className={submitButtonWrapperClassName}>
@@ -94,8 +103,8 @@ ContactUsFormComponent.propTypes = {
 
   inProgress: bool,
 
-  listingTitle: string.isRequired,
-  authorDisplayName: string.isRequired,
+  /*listingTitle: string.isRequired,
+  authorDisplayName: string.isRequired,*/
   sendEnquiryError: propTypes.error,
 
   // from injectIntl
