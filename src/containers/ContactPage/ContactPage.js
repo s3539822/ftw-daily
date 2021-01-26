@@ -46,9 +46,10 @@ export class ContactPageComponent extends Component {
 
 
   onSubmit(values) {
-    sendInternalEmail({
-      "Hello": "Hello"
-    })
+
+    console.log(values)
+
+    sendInternalEmail(values)
       .then(value =>
         console.log(value)
       )
