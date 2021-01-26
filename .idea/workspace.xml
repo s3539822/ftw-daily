@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/AboutPage/AboutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AboutPage/AboutPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/send-internal-email.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/send-internal-email.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ContactPage/ContactPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms/BookingDatesForm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -38,6 +41,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/forms" />
       <recent name="$PROJECT_DIR$/src/forms/BookingDatesForm" />
       <recent name="$PROJECT_DIR$/src/components/Logo" />
       <recent name="$PROJECT_DIR$/src/assets" />
@@ -57,7 +61,8 @@
       <workItem from="1610238182727" duration="820000" />
       <workItem from="1610348231936" duration="2439000" />
       <workItem from="1610363069543" duration="1824000" />
-      <workItem from="1611467282745" duration="4361000" />
+      <workItem from="1611611771724" duration="4006000" />
+      <workItem from="1611626416256" duration="1553000" />
     </task>
     <servers />
   </component>
