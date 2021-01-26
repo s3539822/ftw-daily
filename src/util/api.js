@@ -79,6 +79,14 @@ export const transactionLineItems = body => {
   return post('/api/transaction-line-items', body);
 };
 
+// Fetch transaction line items from the local API endpoint.
+//
+// See `server/api/transaction-line-items.js` to see what data should
+// be sent in the body.
+export const sendInternalEmail = body => {
+  return post('/api/send-internal-email', body);
+};
+
 // Initiate a privileged transaction.
 //
 // With privileged transitions, the transactions need to be created
