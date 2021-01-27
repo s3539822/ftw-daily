@@ -10,7 +10,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  Page,
+  Page, IconSpinner,
 } from '../../components';
 
 import css from './ContactPage.module.css';
@@ -37,6 +37,8 @@ export class ContactPageComponent extends Component {
     super(props);
     const { params } = props;
     this.state = {
+      sendEnquiryComplete: false,
+      sendEnquiryInProgress: false,
       pageClassNames: [],
     };
 
@@ -48,11 +50,14 @@ export class ContactPageComponent extends Component {
   onSubmit(values) {
 
     console.log(values)
+    this.setState({ sendEnquiryInProgress: true });
 
     sendInternalEmail(values)
-      .then(value =>
-        console.log(value)
-      )
+      .then(value => {
+        this.setState({ sendEnquiryComplete: true });
+        console.log(value);
+      })
+
     /*const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
     const listingId = new UUID(params.id);
@@ -119,17 +124,31 @@ export class ContactPageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
-            <h1 className={css.pageTitle}>
-              <FormattedMessage id='ContactUsPage.pageTitle' />
-            </h1>
-
-            <ContactUsForm
-              className={css.enquiryForm}
-              submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
-              sendEnquiryError={sendEnquiryError}
-              onSubmit={this.onSubmit}
-              inProgress={sendEnquiryInProgress}
-            />
+            {this.state.sendEnquiryComplete ? (
+                <h2 className={css.pageTitle}>
+                  <FormattedMessage id='ContactUsPage.messageSent' />
+                </h2>
+              )
+              : this.state.sendEnquiryInProgress ? (
+                <>
+                  <h3 className={css.pageTitle}>
+                    <FormattedMessage id='ContactUsPage.inProgress' />
+                  </h3>
+                  <IconSpinner className={css.inProgress}/>
+                </>
+              ) : (
+                <>
+                  <h1 className={css.pageTitle}>
+                    <FormattedMessage id='ContactUsPage.pageTitle' />
+                  </h1>
+                  <ContactUsForm
+                    className={css.enquiryForm}
+                    sendEnquiryError={sendEnquiryError}
+                    onSubmit={this.onSubmit}
+                    inProgress={this.state.sendEnquiryInProgress}
+                  />
+                </>
+              )}
           </LayoutWrapperMain>
 
           <LayoutWrapperFooter>

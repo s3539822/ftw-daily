@@ -180,6 +180,8 @@
   "ContactUsForm.messageRequired": "Please enter your message",
   "ContactUsForm.messageTitle": "Message",
   "ContactUsForm.submitButtonText": "Send enquiry",
+  "ContactUsPage.inProgress": "Sending...",
+  "ContactUsPage.messageSent": "Message sent!",
   "ContactUsPage.pageTitle": "Wanting to say hi?",
   "CookieConsent.continue": "Continue",
   "CookieConsent.cookieLink": "cookies",
