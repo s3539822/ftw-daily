@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, FieldTextInput, IconEnquiry, Button } from '../../components';
+import { Form, FieldTextInput, IconEnquiry, Button } from '../../components';
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
@@ -17,13 +17,14 @@ const ContactUsFormComponent = props => (
       const {
         rootClassName,
         className,
-        submitButtonWrapperClassName,
         formId,
         handleSubmit,
         inProgress,
         intl,
         sendEnquiryError,
       } = fieldRenderProps;
+
+      console.log(process.env.GMAIL_EMAIL_KEY)
 
       const firstNameTitle = intl.formatMessage({
         id: 'ContactUsForm.firstNameTitle',
@@ -114,22 +115,20 @@ const ContactUsFormComponent = props => (
             rows={4}
           />
 
-          <div className={submitButtonWrapperClassName}>
-            {sendEnquiryError ? (
-              <p className={css.error}>
-                <FormattedMessage id="EnquiryForm.sendEnquiryError" />
-              </p>
-            ) : null}
-            <PrimaryButton
-              className={css.submitButton}
-              type="submit"
-              inProgress={submitInProgress}
-              disabled={submitDisabled}
-              /*ready={submitReady}*/
-            >
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            /*ready={submitReady}*/
+          >
               <FormattedMessage id="ContactUsForm.submitButtonText" />
-            </PrimaryButton>
-          </div>
+          </Button>
+          {sendEnquiryError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EnquiryForm.sendEnquiryError" />
+            </p>
+          ) : null}
         </Form>
       );
     }}
@@ -139,7 +138,6 @@ const ContactUsFormComponent = props => (
 ContactUsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  submitButtonWrapperClassName: null,
   inProgress: false,
   sendEnquiryError: null,
 };
@@ -147,12 +145,10 @@ ContactUsFormComponent.defaultProps = {
 ContactUsFormComponent.propTypes = {
   rootClassName: string,
   className: string,
-  submitButtonWrapperClassName: string,
 
   inProgress: bool,
 
   sendEnquiryError: propTypes.error,
-  sendActionMsg: string.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
