@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import config from '../../config';
 import {
   twitterPageURL,
@@ -10,29 +13,22 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  Page, IconSpinner,
+  Page, IconSpinner, NamedLink,
 } from '../../components';
-
-import css from './ContactPage.module.css';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import routeConfiguration from '../../routeConfiguration';
-import { createResourceLocatorString } from '../../util/routes';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   loadData,
   setInitialValues,
 } from '../ListingPage/ListingPage.duck';
-import { ListingPageComponent } from '../ListingPage/ListingPage';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
 import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
 import { sendInternalEmail } from '../../util/api';
 
-export class ContactPageComponent extends Component {
+import css from './ContactPage.module.css';
 
+export class ContactPageComponent extends Component {
   constructor(props) {
     super(props);
     const { params } = props;
@@ -45,37 +41,21 @@ export class ContactPageComponent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-
-
   onSubmit(values) {
-
-    console.log(values)
+    //Set isLoading state
     this.setState({ sendEnquiryInProgress: true });
 
+    //Send email form
     sendInternalEmail(values)
       .then(value => {
-        this.setState({ sendEnquiryComplete: true });
-        console.log(value);
+        //Set isComplete state
+        this.setState({
+          sendEnquiryComplete: true,
+          sendEnquiryInProgress: false
+        });
       })
-
-    /*const { history, params, onSendEnquiry } = this.props;
-    const routes = routeConfiguration();
-    const listingId = new UUID(params.id);
-    const { message } = values;
-
-    onSendEnquiry(listingId, message.trim())
-      .then(txId => {
-        this.setState({ enquiryModalOpen: false });
-
-        // Redirect to OrderDetailsPage
-        history.push(
-          createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {})
-        );
-      })
-      .catch(() => {
-        // Ignore, error handling in duck file
-      });*/
   }
+
   // prettier-ignore
   render() {
     const {
@@ -125,30 +105,38 @@ export class ContactPageComponent extends Component {
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
             {this.state.sendEnquiryComplete ? (
+              <>
                 <h2 className={css.pageTitle}>
                   <FormattedMessage id='ContactUsPage.messageSent' />
                 </h2>
-              )
-              : this.state.sendEnquiryInProgress ? (
-                <>
-                  <h3 className={css.pageTitle}>
-                    <FormattedMessage id='ContactUsPage.inProgress' />
-                  </h3>
-                  <IconSpinner className={css.inProgress}/>
-                </>
-              ) : (
-                <>
-                  <h1 className={css.pageTitle}>
-                    <FormattedMessage id='ContactUsPage.pageTitle' />
-                  </h1>
-                  <ContactUsForm
-                    className={css.enquiryForm}
-                    sendEnquiryError={sendEnquiryError}
-                    onSubmit={this.onSubmit}
-                    inProgress={this.state.sendEnquiryInProgress}
-                  />
-                </>
-              )}
+
+                <p className={css.pageTitle}>
+                  <FormattedMessage id="ContactUsPage.returnMessage1" />
+                  <NamedLink name="LandingPage">
+                    <FormattedMessage id="ContactUsPage.returnMessage2" />
+                  </NamedLink>
+                </p>
+              </>
+            ) : this.state.sendEnquiryInProgress ? (
+              <>
+                <h3 className={css.pageTitle}>
+                  <FormattedMessage id='ContactUsPage.inProgress' />
+                </h3>
+                <IconSpinner className={css.inProgress}/>
+              </>
+            ) : (
+              <>
+                <h1 className={css.pageTitle}>
+                  <FormattedMessage id='ContactUsPage.pageTitle' />
+                </h1>
+                <ContactUsForm
+                  className={css.enquiryForm}
+                  sendEnquiryError={sendEnquiryError}
+                  onSubmit={this.onSubmit}
+                  inProgress={this.state.sendEnquiryInProgress}
+                />
+              </>
+            )}
           </LayoutWrapperMain>
 
           <LayoutWrapperFooter>
@@ -160,7 +148,7 @@ export class ContactPageComponent extends Component {
   }
 };
 
-ListingPageComponent.propTypes = {
+ContactPageComponent.propTypes = {
   // from withRouter
   /*history: shape({
     push: func.isRequired,
@@ -254,8 +242,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   /*onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),*/
+  /*callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
     dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),

@@ -183,6 +183,8 @@
   "ContactUsPage.inProgress": "Sending...",
   "ContactUsPage.messageSent": "Message sent!",
   "ContactUsPage.pageTitle": "Wanting to say hi?",
+  "ContactUsPage.returnMessage1": "Return ",
+  "ContactUsPage.returnMessage2": "home",
   "CookieConsent.continue": "Continue",
   "CookieConsent.cookieLink": "cookies",
   "CookieConsent.message": "Welcome to CampWhere, friend! We use {cookieLink} to enhance your browsing experience.",
