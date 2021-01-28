@@ -16,15 +16,10 @@ import {
   Page, IconSpinner, NamedLink,
 } from '../../components';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import {
-  loadData,
-  setInitialValues,
-} from '../ListingPage/ListingPage.duck';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { sendMessage, setInitialValues, } from './ContactPage.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
 import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
-import { sendInternalEmail } from '../../util/api';
 
 import css from './ContactPage.module.css';
 
@@ -33,54 +28,29 @@ export class ContactPageComponent extends Component {
     super(props);
     const { params } = props;
     this.state = {
-      sendEnquiryComplete: false,
-      sendEnquiryInProgress: false,
       pageClassNames: [],
     };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    //Set isLoading state
-    this.setState({ sendEnquiryInProgress: true });
-
-    //Send email form
-    sendInternalEmail(values)
-      .then(value => {
-        //Set isComplete state
-        this.setState({
-          sendEnquiryComplete: true,
-          sendEnquiryInProgress: false
-        });
-      })
+  onSubmitMessage(values) {
+    const { history, params, onSendMessage } = this.props;
+    onSendMessage(values)
   }
 
   // prettier-ignore
   render() {
     const {
-      unitType,
       isAuthenticated,
       currentUser,
-      getListing,
-      getOwnListing,
       intl,
-      onManageDisableScrolling,
       params: rawParams,
       location,
       scrollingDisabled,
-      showListingError,
-      reviews,
-      fetchReviewsError,
-      sendEnquiryInProgress,
-      sendEnquiryError,
-      timeSlots,
-      fetchTimeSlotsError,
-      filterConfig,
-      onFetchTransactionLineItems,
-      lineItems,
-      fetchLineItemsInProgress,
-      fetchLineItemsError,
+      sendMessageInProgress,
+      sendMessageSuccess,
+      sendMessageError,
     } = this.props;
 
     const { siteTwitterHandle, siteFacebookPage } = config;
@@ -104,7 +74,7 @@ export class ContactPageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
-            {this.state.sendEnquiryComplete ? (
+            {sendMessageSuccess ? (
               <>
                 <h2 className={css.pageTitle}>
                   <FormattedMessage id='ContactUsPage.messageSent' />
@@ -117,7 +87,7 @@ export class ContactPageComponent extends Component {
                   </NamedLink>
                 </p>
               </>
-            ) : this.state.sendEnquiryInProgress ? (
+            ) : sendMessageInProgress ? (
               <>
                 <h3 className={css.pageTitle}>
                   <FormattedMessage id='ContactUsPage.inProgress' />
@@ -131,9 +101,9 @@ export class ContactPageComponent extends Component {
                 </h1>
                 <ContactUsForm
                   className={css.enquiryForm}
-                  sendEnquiryError={sendEnquiryError}
-                  onSubmit={this.onSubmit}
-                  inProgress={this.state.sendEnquiryInProgress}
+                  sendEnquiryError={sendMessageError}
+                  onSubmit={this.onSubmitMessage}
+                  inProgress={sendMessageInProgress}
                 />
               </>
             )}
@@ -150,105 +120,58 @@ export class ContactPageComponent extends Component {
 
 ContactPageComponent.propTypes = {
   // from withRouter
-  /*history: shape({
+  history: shape({
     push: func.isRequired,
   }).isRequired,
   location: shape({
     search: string,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 
-  params: shape({
+  /*params: shape({
     id: string.isRequired,
     slug: string,
     variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
-  }).isRequired,
+  }).isRequired,*/
 
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
-  getListing: func.isRequired,
-  getOwnListing: func.isRequired,
-  onManageDisableScrolling: func.isRequired,*/
+  onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
-  /*enquiryModalOpenForListingId: string,
-  showListingError: propTypes.error,
   callSetInitialValues: func.isRequired,
-  reviews: arrayOf(propTypes.review),
-  fetchReviewsError: propTypes.error,
-  timeSlots: arrayOf(propTypes.timeSlot),
-  fetchTimeSlotsError: propTypes.error,
-  sendEnquiryInProgress: bool.isRequired,
-  sendEnquiryError: propTypes.error,
-  onSendEnquiry: func.isRequired,
-  onInitializeCardPaymentData: func.isRequired,
-  filterConfig: array,
+  sendMessageInProgress: bool.isRequired,
+  sendMessageSuccess: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
   onFetchTransactionLineItems: func.isRequired,
-  lineItems: array,
-  fetchLineItemsInProgress: bool.isRequired,
-  fetchLineItemsError: propTypes.error,*/
 };
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
   const {
-    showListingError,
-    reviews,
-    fetchReviewsError,
-    timeSlots,
-    fetchTimeSlotsError,
-    sendEnquiryInProgress,
-    sendEnquiryError,
-    lineItems,
-    fetchLineItemsInProgress,
-    fetchLineItemsError,
-    enquiryModalOpenForListingId,
-  } = state.ListingPage;
+    sendMessageInProgress,
+    sendMessageSuccess,
+    sendMessageError,
+  } = state.ContactPage;
   const { currentUser } = state.user;
 
-  const getListing = id => {
-    const ref = { id, type: 'listing' };
-    const listings = getMarketplaceEntities(state, [ref]);
-    return listings.length === 1 ? listings[0] : null;
-  };
-
-  const getOwnListing = id => {
-    const ref = { id, type: 'ownListing' };
-    const listings = getMarketplaceEntities(state, [ref]);
-    return listings.length === 1 ? listings[0] : null;
-  };
-
   return {
-    /*isAuthenticated,
+    isAuthenticated,
     currentUser,
-    getListing,
-    getOwnListing,*/
     scrollingDisabled: isScrollingDisabled(state),
-    /*enquiryModalOpenForListingId,
-    showListingError,
-    reviews,
-    fetchReviewsError,
-    timeSlots,
-    fetchTimeSlotsError,
-    lineItems,
-    fetchLineItemsInProgress,
-    fetchLineItemsError,
-    sendEnquiryInProgress,
-    sendEnquiryError,*/
+    sendMessageInProgress,
+    sendMessageSuccess,
+    sendMessageError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  /*onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),*/
-  /*callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
+  callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
-  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
-  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
-  onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),*/
+  onSendMessage: (values) =>
+    dispatch(sendMessage(values)),
 });
 
 const ContactPage = compose(
