@@ -2,59 +2,47 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import config from '../../config';
-import {
-  twitterPageURL,
-} from '../../util/urlHelpers';
 import { TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
+  IconSpinner,
+  Page,
+  NamedLink,
   Footer,
-  Page, IconSpinner, NamedLink,
 } from '../../components';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { sendMessage, setInitialValues, } from './ContactPage.duck';
+import { sendMessage, setInitialValues } from './ContactPage.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
+import { propTypes } from '../../util/types';
 
 import css from './ContactPage.module.css';
 
 export class ContactPageComponent extends Component {
   constructor(props) {
     super(props);
-    const { params } = props;
-    this.state = {
-      pageClassNames: [],
-    };
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitMessage = this.onSubmitMessage.bind(this);
   }
 
   onSubmitMessage(values) {
-    const { history, params, onSendMessage } = this.props;
+    const { currentUser, onSendMessage } = this.props;
+    values.currentUser = currentUser
     onSendMessage(values)
   }
 
   // prettier-ignore
   render() {
     const {
-      isAuthenticated,
-      currentUser,
-      intl,
-      params: rawParams,
-      location,
       scrollingDisabled,
       sendMessageInProgress,
       sendMessageSuccess,
       sendMessageError,
     } = this.props;
-
-    const { siteTwitterHandle, siteFacebookPage } = config;
-    const siteTwitterPage = twitterPageURL(siteTwitterHandle);
 
     return(
       <Page
@@ -130,12 +118,6 @@ ContactPageComponent.propTypes = {
   // from injectIntl
   intl: intlShape.isRequired,
 
-  /*params: shape({
-    id: string.isRequired,
-    slug: string,
-    variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
-  }).isRequired,*/
-
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
@@ -184,6 +166,5 @@ const ContactPage = compose(
 )(ContactPageComponent);
 
 ContactPage.setInitialValues = initialValues => setInitialValues(initialValues);
-ContactPage.loadData = loadData;
 
 export default ContactPage;

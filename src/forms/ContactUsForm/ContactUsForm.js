@@ -24,8 +24,6 @@ const ContactUsFormComponent = props => (
         sendEnquiryError,
       } = fieldRenderProps;
 
-      console.log(process.env.GMAIL_EMAIL_KEY)
-
       const firstNameTitle = intl.formatMessage({
         id: 'ContactUsForm.firstNameTitle',
       });

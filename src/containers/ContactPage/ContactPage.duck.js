@@ -21,7 +21,7 @@ const initialState = {
   sendMessageError: null,
 };
 
-const listingPageReducer = (state = initialState, action = {}) => {
+const contactPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
     case SET_INITIAL_VALUES:
@@ -39,7 +39,7 @@ const listingPageReducer = (state = initialState, action = {}) => {
   }
 };
 
-export default listingPageReducer;
+export default contactPageReducer;
 
 // ================ Action creators ================ //
 
@@ -65,4 +65,3 @@ export const sendMessage = (values) => (dispatch) => {
       throw e;
     });
 };
-
