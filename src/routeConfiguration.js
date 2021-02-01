@@ -7,6 +7,7 @@ import {
   ContactPage,
   EditListingPage,
   EmailVerificationPage,
+  FAQPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -69,6 +70,11 @@ const routeConfiguration = () => {
       name: 'ContactPage',
       component: ContactPage,
       setInitialValues: ContactPage.setInitialValues,
+    },
+    {
+      path: '/faq',
+      name: 'FAQPage',
+      component: FAQPage,
     },
     {
       path: '/s',
