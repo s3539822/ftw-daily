@@ -5,6 +5,8 @@ export { default as ContactPage } from './ContactPage/ContactPage';
 export { default as ContactDetailsPage } from './ContactDetailsPage/ContactDetailsPage';
 export { default as EditListingPage } from './EditListingPage/EditListingPage';
 export { default as EmailVerificationPage } from './EmailVerificationPage/EmailVerificationPage';
+export { default as FAQPage } from './FAQPage/FAQPage';
+export { default as HelpPage } from './HelpPage/HelpPage';
 export { default as InboxPage } from './InboxPage/InboxPage';
 export { default as LandingPage } from './LandingPage/LandingPage';
 export { default as ListingPage } from './ListingPage/ListingPage';
