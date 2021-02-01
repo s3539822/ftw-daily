@@ -8,6 +8,7 @@ import {
   EditListingPage,
   EmailVerificationPage,
   FAQPage,
+  HelpPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -75,6 +76,11 @@ const routeConfiguration = () => {
       path: '/faq',
       name: 'FAQPage',
       component: FAQPage,
+    },
+    {
+      path: '/help',
+      name: 'HelpPage',
+      component: HelpPage,
     },
     {
       path: '/s',
