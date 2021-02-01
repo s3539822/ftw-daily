@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, FieldTextInput, IconEnquiry, Button } from '../../components';
+import { Form, FieldTextInput, IconEnquiry, Button, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
@@ -14,13 +14,22 @@ const ContactUsFormComponent = props => (
   <FinalForm
     {...props}
     render={fieldRenderProps => {
+      const onSubmit = () => {
+        const { onResetMessage } = fieldRenderProps;
+        onResetMessage()
+      }
+
       const {
         rootClassName,
         className,
         formId,
         handleSubmit,
         inProgress,
+        sendMessageSuccess,
         intl,
+        updated,
+        pristine,
+        ready,
         sendEnquiryError,
       } = fieldRenderProps;
 
@@ -71,6 +80,8 @@ const ContactUsFormComponent = props => (
       const classes = classNames(rootClassName || css.root, className);
       const submitInProgress = inProgress;
       const submitDisabled = submitInProgress;
+      const submitReady = (updated && pristine) || ready;
+      const submitSuccess = /*(!pristine) ? (*/sendMessageSuccess/* ? ready : false) : false;*/
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -118,10 +129,18 @@ const ContactUsFormComponent = props => (
             type="submit"
             inProgress={submitInProgress}
             disabled={submitDisabled}
-            /*ready={submitReady}*/
+            ready={submitReady}
           >
-              <FormattedMessage id="ContactUsForm.submitButtonText" />
+            <FormattedMessage id="ContactUsForm.submitButtonText" />
           </Button>
+          {submitSuccess ? (
+            <p className={css.success}>
+              <FormattedMessage id="ContactUsPage.returnMessage1" />
+              <NamedLink name="LandingPage"  onClick={onSubmit}>
+                <FormattedMessage id="ContactUsPage.returnMessage2"/>
+              </NamedLink>
+            </p>
+          ) : null}
           {sendEnquiryError ? (
             <p className={css.error}>
               <FormattedMessage id="EnquiryForm.sendEnquiryError" />
@@ -145,6 +164,8 @@ ContactUsFormComponent.propTypes = {
   className: string,
 
   inProgress: bool,
+  updated: bool.isRequired,
+  ready: bool.isRequired,
 
   sendEnquiryError: propTypes.error,
 

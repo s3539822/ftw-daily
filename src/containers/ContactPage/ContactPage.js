@@ -8,13 +8,11 @@ import {
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
-  IconSpinner,
   Page,
-  NamedLink,
   Footer,
 } from '../../components';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { sendMessage, setInitialValues } from './ContactPage.duck';
+import { resetMessage, sendMessage, setInitialValues } from './ContactPage.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { bool, func, shape, string } from 'prop-types';
 import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
@@ -42,6 +40,7 @@ export class ContactPageComponent extends Component {
       sendMessageInProgress,
       sendMessageSuccess,
       sendMessageError,
+      onResetMessage,
     } = this.props;
 
     return(
@@ -62,39 +61,17 @@ export class ContactPageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
-            {sendMessageSuccess ? (
-              <>
-                <h2 className={css.pageTitle}>
-                  <FormattedMessage id='ContactUsPage.messageSent' />
-                </h2>
-
-                <p className={css.pageTitle}>
-                  <FormattedMessage id="ContactUsPage.returnMessage1" />
-                  <NamedLink name="LandingPage">
-                    <FormattedMessage id="ContactUsPage.returnMessage2" />
-                  </NamedLink>
-                </p>
-              </>
-            ) : sendMessageInProgress ? (
-              <>
-                <h3 className={css.pageTitle}>
-                  <FormattedMessage id='ContactUsPage.inProgress' />
-                </h3>
-                <IconSpinner className={css.inProgress}/>
-              </>
-            ) : (
-              <>
-                <h1 className={css.pageTitle}>
-                  <FormattedMessage id='ContactUsPage.pageTitle' />
-                </h1>
-                <ContactUsForm
-                  className={css.enquiryForm}
-                  sendEnquiryError={sendMessageError}
-                  onSubmit={this.onSubmitMessage}
-                  inProgress={sendMessageInProgress}
-                />
-              </>
-            )}
+            <h1 className={css.pageTitle}>
+              <FormattedMessage id='ContactUsPage.pageTitle' />
+            </h1>
+            <ContactUsForm
+              className={css.enquiryForm}
+              sendEnquiryError={sendMessageError}
+              onSubmit={this.onSubmitMessage}
+              inProgress={sendMessageInProgress}
+              sendMessageSuccess={sendMessageSuccess}
+              onResetMessage={onResetMessage}
+            />
           </LayoutWrapperMain>
 
           <LayoutWrapperFooter>
@@ -154,6 +131,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onSendMessage: (values) =>
     dispatch(sendMessage(values)),
+  onResetMessage: (values) =>
+    dispatch(resetMessage(values)),
 });
 
 const ContactPage = compose(

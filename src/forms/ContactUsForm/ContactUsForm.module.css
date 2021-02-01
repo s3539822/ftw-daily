@@ -33,6 +33,14 @@
   }
 }
 
+.success {
+  margin-top: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;

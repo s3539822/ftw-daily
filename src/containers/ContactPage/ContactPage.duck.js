@@ -1,14 +1,12 @@
 import pick from 'lodash/pick';
-import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { sendInternalEmail } from '../../util/api';
-
-const { UUID } = sdkTypes;
 
 // ================ Action types ================ //
 
 export const SET_INITIAL_VALUES = 'app/ContactPage/SET_INITIAL_VALUES';
 
+export const SEND_MESSAGE_RESET = 'app/ContactPage/SEND_MESSAGE_RESET';
 export const SEND_MESSAGE_REQUEST = 'app/ContactPage/SEND_MESSAGE_REQUEST';
 export const SEND_MESSAGE_SUCCESS = 'app/ContactPage/SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_ERROR = 'app/ContactPage/SEND_MESSAGE_ERROR';
@@ -27,6 +25,8 @@ const contactPageReducer = (state = initialState, action = {}) => {
     case SET_INITIAL_VALUES:
       return { ...initialState, ...payload };
 
+    case SEND_MESSAGE_RESET:
+      return { ...state, sendMessageInProgress: false, sendMessageSuccess: false, sendMessageError: null };
     case SEND_MESSAGE_REQUEST:
       return { ...state, sendMessageInProgress: true, sendMessageSuccess: false, sendMessageError: null };
     case SEND_MESSAGE_SUCCESS:
@@ -48,6 +48,7 @@ export const setInitialValues = initialValues => ({
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
+export const sendMessageReset = () => ({ type: SEND_MESSAGE_RESET });
 export const sendMessageRequest = () => ({ type: SEND_MESSAGE_REQUEST });
 export const sendMessageSuccess = () => ({ type: SEND_MESSAGE_SUCCESS });
 export const sendMessageError = e => ({ type: SEND_MESSAGE_ERROR, error: true, payload: e });
@@ -65,3 +66,7 @@ export const sendMessage = (values) => (dispatch) => {
       throw e;
     });
 };
+
+export const resetMessage = () => (dispatch) => {
+  dispatch(sendMessageReset());
+}

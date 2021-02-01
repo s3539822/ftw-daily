@@ -24,8 +24,8 @@ import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
 
-export const NamedLinkComponent = props => {
-  const { name, params, title } = props;
+export const NamedLinkComponent = React.forwardRef((props, ref) => {
+  const { name, params, title, onClick } = props;
 
   // Link props
   const { to, children } = props;
@@ -39,14 +39,15 @@ export const NamedLinkComponent = props => {
     className: classNames(className, { [activeClassName]: active }),
     style,
     title,
+    onClick
   };
 
   return (
-    <Link to={{ pathname, ...to }} {...aElemProps}>
+    <Link to={{ pathname, ...to }} {...aElemProps} ref={ref}>
       {children}
     </Link>
   );
-};
+});
 
 const { object, string, shape, any } = PropTypes;
 
