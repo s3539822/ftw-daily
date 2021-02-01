@@ -1,105 +1,47 @@
 import React, { Component } from 'react';
-import config from '../../config';
-import {
-  twitterPageURL,
-} from '../../util/urlHelpers';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
-  Footer,
   Page,
+  Footer,
 } from '../../components';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { resetMessage, sendMessage, setInitialValues } from './ContactPage.duck';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { bool, func, shape, string } from 'prop-types';
+import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
+import { propTypes } from '../../util/types';
 
 import css from './ContactPage.module.css';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import routeConfiguration from '../../routeConfiguration';
-import { createResourceLocatorString } from '../../util/routes';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import {
-  loadData,
-  setInitialValues,
-} from '../ListingPage/ListingPage.duck';
-import { ListingPageComponent } from '../ListingPage/ListingPage';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { array, arrayOf, bool, func, oneOf, shape, string } from 'prop-types';
-import ContactUsForm from '../../forms/ContactUsForm/ContactUsForm';
-import { sendInternalEmail } from '../../util/api';
 
 export class ContactPageComponent extends Component {
-
   constructor(props) {
     super(props);
-    const { params } = props;
-    this.state = {
-      pageClassNames: [],
-    };
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitMessage = this.onSubmitMessage.bind(this);
   }
 
-
-
-  onSubmit(values) {
-
-    console.log(values)
-
-    sendInternalEmail(values)
-      .then(value =>
-        console.log(value)
-      )
-    /*const { history, params, onSendEnquiry } = this.props;
-    const routes = routeConfiguration();
-    const listingId = new UUID(params.id);
-    const { message } = values;
-
-    onSendEnquiry(listingId, message.trim())
-      .then(txId => {
-        this.setState({ enquiryModalOpen: false });
-
-        // Redirect to OrderDetailsPage
-        history.push(
-          createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {})
-        );
-      })
-      .catch(() => {
-        // Ignore, error handling in duck file
-      });*/
+  onSubmitMessage(values) {
+    const { currentUser, onSendMessage } = this.props;
+    values.currentUser = currentUser
+    onSendMessage(values)
   }
+
   // prettier-ignore
   render() {
     const {
-      unitType,
-      isAuthenticated,
-      currentUser,
-      getListing,
-      getOwnListing,
-      intl,
-      onManageDisableScrolling,
-      params: rawParams,
-      location,
       scrollingDisabled,
-      showListingError,
-      reviews,
-      fetchReviewsError,
-      sendEnquiryInProgress,
-      sendEnquiryError,
-      timeSlots,
-      fetchTimeSlotsError,
-      filterConfig,
-      onFetchTransactionLineItems,
-      lineItems,
-      fetchLineItemsInProgress,
-      fetchLineItemsError,
+      sendMessageInProgress,
+      sendMessageSuccess,
+      sendMessageError,
+      onResetMessage,
     } = this.props;
-
-    const { siteTwitterHandle, siteFacebookPage } = config;
-    const siteTwitterPage = twitterPageURL(siteTwitterHandle);
 
     return(
       <Page
@@ -122,13 +64,13 @@ export class ContactPageComponent extends Component {
             <h1 className={css.pageTitle}>
               <FormattedMessage id='ContactUsPage.pageTitle' />
             </h1>
-
             <ContactUsForm
               className={css.enquiryForm}
-              submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
-              sendEnquiryError={sendEnquiryError}
-              onSubmit={this.onSubmit}
-              inProgress={sendEnquiryInProgress}
+              sendEnquiryError={sendMessageError}
+              onSubmit={this.onSubmitMessage}
+              inProgress={sendMessageInProgress}
+              sendMessageSuccess={sendMessageSuccess}
+              onResetMessage={onResetMessage}
             />
           </LayoutWrapperMain>
 
@@ -141,107 +83,54 @@ export class ContactPageComponent extends Component {
   }
 };
 
-ListingPageComponent.propTypes = {
+ContactPageComponent.propTypes = {
   // from withRouter
-  /*history: shape({
+  history: shape({
     push: func.isRequired,
   }).isRequired,
   location: shape({
     search: string,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 
-  params: shape({
-    id: string.isRequired,
-    slug: string,
-    variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
-  }).isRequired,
-
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
-  getListing: func.isRequired,
-  getOwnListing: func.isRequired,
-  onManageDisableScrolling: func.isRequired,*/
   scrollingDisabled: bool.isRequired,
-  /*enquiryModalOpenForListingId: string,
-  showListingError: propTypes.error,
   callSetInitialValues: func.isRequired,
-  reviews: arrayOf(propTypes.review),
-  fetchReviewsError: propTypes.error,
-  timeSlots: arrayOf(propTypes.timeSlot),
-  fetchTimeSlotsError: propTypes.error,
-  sendEnquiryInProgress: bool.isRequired,
-  sendEnquiryError: propTypes.error,
-  onSendEnquiry: func.isRequired,
-  onInitializeCardPaymentData: func.isRequired,
-  filterConfig: array,
-  onFetchTransactionLineItems: func.isRequired,
-  lineItems: array,
-  fetchLineItemsInProgress: bool.isRequired,
-  fetchLineItemsError: propTypes.error,*/
+  sendMessageInProgress: bool.isRequired,
+  sendMessageSuccess: bool.isRequired,
+  sendMessageError: propTypes.error,
+  onSendMessage: func.isRequired,
 };
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
   const {
-    showListingError,
-    reviews,
-    fetchReviewsError,
-    timeSlots,
-    fetchTimeSlotsError,
-    sendEnquiryInProgress,
-    sendEnquiryError,
-    lineItems,
-    fetchLineItemsInProgress,
-    fetchLineItemsError,
-    enquiryModalOpenForListingId,
-  } = state.ListingPage;
+    sendMessageInProgress,
+    sendMessageSuccess,
+    sendMessageError,
+  } = state.ContactPage;
   const { currentUser } = state.user;
 
-  const getListing = id => {
-    const ref = { id, type: 'listing' };
-    const listings = getMarketplaceEntities(state, [ref]);
-    return listings.length === 1 ? listings[0] : null;
-  };
-
-  const getOwnListing = id => {
-    const ref = { id, type: 'ownListing' };
-    const listings = getMarketplaceEntities(state, [ref]);
-    return listings.length === 1 ? listings[0] : null;
-  };
-
   return {
-    /*isAuthenticated,
+    isAuthenticated,
     currentUser,
-    getListing,
-    getOwnListing,*/
     scrollingDisabled: isScrollingDisabled(state),
-    /*enquiryModalOpenForListingId,
-    showListingError,
-    reviews,
-    fetchReviewsError,
-    timeSlots,
-    fetchTimeSlotsError,
-    lineItems,
-    fetchLineItemsInProgress,
-    fetchLineItemsError,
-    sendEnquiryInProgress,
-    sendEnquiryError,*/
+    sendMessageInProgress,
+    sendMessageSuccess,
+    sendMessageError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  /*onManageDisableScrolling: (componentId, disableScrolling) =>
-    dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
-  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
-  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
-  onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),*/
+  onSendMessage: (values) =>
+    dispatch(sendMessage(values)),
+  onResetMessage: (values) =>
+    dispatch(resetMessage(values)),
 });
 
 const ContactPage = compose(
@@ -254,6 +143,5 @@ const ContactPage = compose(
 )(ContactPageComponent);
 
 ContactPage.setInitialValues = initialValues => setInitialValues(initialValues);
-ContactPage.loadData = loadData;
 
 export default ContactPage;
