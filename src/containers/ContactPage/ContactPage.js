@@ -97,14 +97,12 @@ ContactPageComponent.propTypes = {
 
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
-  onManageDisableScrolling: func.isRequired,
   scrollingDisabled: bool.isRequired,
   callSetInitialValues: func.isRequired,
   sendMessageInProgress: bool.isRequired,
   sendMessageSuccess: bool.isRequired,
   sendMessageError: propTypes.error,
   onSendMessage: func.isRequired,
-  onFetchTransactionLineItems: func.isRequired,
 };
 
 const mapStateToProps = state => {

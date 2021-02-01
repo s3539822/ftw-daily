@@ -14,11 +14,6 @@ const ContactUsFormComponent = props => (
   <FinalForm
     {...props}
     render={fieldRenderProps => {
-      const onSubmit = () => {
-        const { onResetMessage } = fieldRenderProps;
-        onResetMessage()
-      }
-
       const {
         rootClassName,
         className,
@@ -26,10 +21,8 @@ const ContactUsFormComponent = props => (
         handleSubmit,
         inProgress,
         sendMessageSuccess,
+        onResetMessage,
         intl,
-        updated,
-        pristine,
-        ready,
         sendEnquiryError,
       } = fieldRenderProps;
 
@@ -80,8 +73,7 @@ const ContactUsFormComponent = props => (
       const classes = classNames(rootClassName || css.root, className);
       const submitInProgress = inProgress;
       const submitDisabled = submitInProgress;
-      const submitReady = (updated && pristine) || ready;
-      const submitSuccess = /*(!pristine) ? (*/sendMessageSuccess/* ? ready : false) : false;*/
+      const submitSuccess = sendMessageSuccess;
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -129,14 +121,14 @@ const ContactUsFormComponent = props => (
             type="submit"
             inProgress={submitInProgress}
             disabled={submitDisabled}
-            ready={submitReady}
+            ready={submitSuccess}
           >
             <FormattedMessage id="ContactUsForm.submitButtonText" />
           </Button>
           {submitSuccess ? (
             <p className={css.success}>
               <FormattedMessage id="ContactUsPage.returnMessage1" />
-              <NamedLink name="LandingPage"  onClick={onSubmit}>
+              <NamedLink name="LandingPage" onClick={onResetMessage} >
                 <FormattedMessage id="ContactUsPage.returnMessage2"/>
               </NamedLink>
             </p>
@@ -164,8 +156,6 @@ ContactUsFormComponent.propTypes = {
   className: string,
 
   inProgress: bool,
-  updated: bool.isRequired,
-  ready: bool.isRequired,
 
   sendEnquiryError: propTypes.error,
 
