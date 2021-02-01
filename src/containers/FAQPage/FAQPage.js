@@ -40,10 +40,15 @@ const FAQPage = () => {
         <LayoutWrapperMain className={css.mainWrapper}>
           <h1>Frequently Asked Questions</h1>
 
-          <div>
+          {/*<div>
             <h3>Question 1?</h3>
             <p>Answer: Lorem ipsum</p>
+          </div>*/}
+
+          <div>
+            <h3>Page under construction - Coming soon</h3>
           </div>
+
         </LayoutWrapperMain>
 
         <LayoutWrapperFooter>
