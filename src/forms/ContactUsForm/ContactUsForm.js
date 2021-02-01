@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, FieldTextInput, IconEnquiry, Button } from '../../components';
+import { Form, FieldTextInput, IconEnquiry, Button, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
@@ -17,10 +17,11 @@ const ContactUsFormComponent = props => (
       const {
         rootClassName,
         className,
-        submitButtonWrapperClassName,
         formId,
         handleSubmit,
         inProgress,
+        sendMessageSuccess,
+        onResetMessage,
         intl,
         sendEnquiryError,
       } = fieldRenderProps;
@@ -72,6 +73,7 @@ const ContactUsFormComponent = props => (
       const classes = classNames(rootClassName || css.root, className);
       const submitInProgress = inProgress;
       const submitDisabled = submitInProgress;
+      const submitSuccess = sendMessageSuccess;
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -114,22 +116,28 @@ const ContactUsFormComponent = props => (
             rows={4}
           />
 
-          <div className={submitButtonWrapperClassName}>
-            {sendEnquiryError ? (
-              <p className={css.error}>
-                <FormattedMessage id="EnquiryForm.sendEnquiryError" />
-              </p>
-            ) : null}
-            <PrimaryButton
-              className={css.submitButton}
-              type="submit"
-              inProgress={submitInProgress}
-              disabled={submitDisabled}
-              /*ready={submitReady}*/
-            >
-              <FormattedMessage id="ContactUsForm.submitButtonText" />
-            </PrimaryButton>
-          </div>
+          <Button
+            className={css.submitButton}
+            type="submit"
+            inProgress={submitInProgress}
+            disabled={submitDisabled}
+            ready={submitSuccess}
+          >
+            <FormattedMessage id="ContactUsForm.submitButtonText" />
+          </Button>
+          {submitSuccess ? (
+            <p className={css.success}>
+              <FormattedMessage id="ContactUsPage.returnMessage1" />
+              <NamedLink name="LandingPage" onClick={onResetMessage} >
+                <FormattedMessage id="ContactUsPage.returnMessage2"/>
+              </NamedLink>
+            </p>
+          ) : null}
+          {sendEnquiryError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EnquiryForm.sendEnquiryError" />
+            </p>
+          ) : null}
         </Form>
       );
     }}
@@ -139,7 +147,6 @@ const ContactUsFormComponent = props => (
 ContactUsFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  submitButtonWrapperClassName: null,
   inProgress: false,
   sendEnquiryError: null,
 };
@@ -147,12 +154,10 @@ ContactUsFormComponent.defaultProps = {
 ContactUsFormComponent.propTypes = {
   rootClassName: string,
   className: string,
-  submitButtonWrapperClassName: string,
 
   inProgress: bool,
 
   sendEnquiryError: propTypes.error,
-  sendActionMsg: string.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,

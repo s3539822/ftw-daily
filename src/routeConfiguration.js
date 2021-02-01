@@ -68,6 +68,7 @@ const routeConfiguration = () => {
       path: '/contact',
       name: 'ContactPage',
       component: ContactPage,
+      setInitialValues: ContactPage.setInitialValues,
     },
     {
       path: '/s',

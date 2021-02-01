@@ -10,7 +10,7 @@ import {
   IconSocialMediaTwitter,
   Logo,
   ExternalLink,
-  NamedLink,
+  NamedLink, NamedRedirect,
 } from '../../components';
 
 import css from './Footer.module.css';

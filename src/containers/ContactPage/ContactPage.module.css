@@ -60,18 +60,12 @@
   }
 }
 
-.enquirySubmitButtonWrapper {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 24px;
-  background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
-    position: static;
-    padding: 0;
-    margin-top: auto;
-  }
+.inProgress {
+  width: 42px;
+  height: 42px;
+  stroke: var(--marketplaceColor);
+  stroke-width: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
 }
-
