@@ -469,8 +469,8 @@ class ManageAvailabilityCalendar extends Component {
             label={"Default number of sites:"}
             labelId={".input2Label"}
             rootClassName={css.defaultSiteInput}
-            /*defaultValue={this.state.seats}
             isUncontrolled={true}
+            /*defaultValue={this.state.seats}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}*/
           />
