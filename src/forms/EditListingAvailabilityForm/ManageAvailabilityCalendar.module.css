@@ -400,3 +400,7 @@
   width: 100%;
   margin-bottom: 24px;
 }
+
+.defaultSiteInput {
+  max-width: 40%;
+}

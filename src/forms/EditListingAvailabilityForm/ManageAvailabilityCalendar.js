@@ -462,6 +462,20 @@ class ManageAvailabilityCalendar extends Component {
         }}
       >
         <div className={css.calendarWrapper}>
+          <FieldTextInput
+            type="text"
+            id={`.input2`}
+            name="input2"
+            label={"Default number of sites:"}
+            labelId={".input2Label"}
+            rootClassName={css.defaultSiteInput}
+            /*defaultValue={this.state.seats}
+            isUncontrolled={true}
+            onSeatChange={this.onSeatChange}
+            customErrorText={this.state.seatError}*/
+          />
+        </div>
+        <div className={css.calendarWrapper}>
           {width > 0 ? (
             <div style={{ width: `${calendarGridWidth}px` }}>
               <DayPickerSingleDateController
@@ -520,6 +534,7 @@ class ManageAvailabilityCalendar extends Component {
               />
             </p>
           ) : null}
+
         </div>
         <div className={css.calendarWrapper}>
           <FieldTextInput
