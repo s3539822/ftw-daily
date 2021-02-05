@@ -401,6 +401,15 @@
   margin-bottom: 24px;
 }
 
+.inputWrapper {
+  flex-grow: 1;
+  position: relative;
+  width: 50%;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
 .defaultSiteInput {
-  max-width: 40%;
+  max-width: 80%;
+  margin: 0 5% 0 0;
 }

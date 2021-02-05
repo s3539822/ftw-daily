@@ -224,6 +224,8 @@ class ManageAvailabilityCalendar extends Component {
       seatError: null,
     };
 
+    this.onDefaultSeatChange = this.onDefaultSeatChange.bind(this);
+    this.updateDefaultSeats = this.updateDefaultSeats.bind(this);
     this.onSeatChange = this.onSeatChange.bind(this);
     this.updateSeatsSelector = this.updateSeatsSelector.bind(this);
     this.fetchMonthData = this.fetchMonthData.bind(this);
@@ -247,6 +249,13 @@ class ManageAvailabilityCalendar extends Component {
       document.getElementById(".input1").value = "Not available";
     else
       document.getElementById(".input1").value = seats;
+  }
+
+  updateDefaultSeats(seats) {
+    if (seats === 0)
+      document.getElementById(".input2").value = "Not available";
+    else
+      document.getElementById(".input2").value = seats;
   }
 
   fetchMonthData(monthMoment) {
@@ -343,6 +352,19 @@ class ManageAvailabilityCalendar extends Component {
     } else {
       this.updateSeatsSelector(date, 1)
     }
+  }
+
+  onDefaultSeatChange(e) {
+    e.preventDefault()
+
+    const {listing} = this.props
+    const seats = e.target.value
+
+    listing.attributes.availabilityPlan.entries.forEach((val) => {
+      val.seats = seats
+    })
+
+    this.updateDefaultSeats(seats)
   }
 
   onSeatChange(e) {
@@ -462,20 +484,6 @@ class ManageAvailabilityCalendar extends Component {
         }}
       >
         <div className={css.calendarWrapper}>
-          <FieldTextInput
-            type="text"
-            id={`.input2`}
-            name="input2"
-            label={"Default number of sites:"}
-            labelId={".input2Label"}
-            rootClassName={css.defaultSiteInput}
-            isUncontrolled={true}
-            /*defaultValue={this.state.seats}
-            onSeatChange={this.onSeatChange}
-            customErrorText={this.state.seatError}*/
-          />
-        </div>
-        <div className={css.calendarWrapper}>
           {width > 0 ? (
             <div style={{ width: `${calendarGridWidth}px` }}>
               <DayPickerSingleDateController
@@ -536,7 +544,7 @@ class ManageAvailabilityCalendar extends Component {
           ) : null}
 
         </div>
-        <div className={css.calendarWrapper}>
+        <div className={css.inputWrapper}>
           <FieldTextInput
             type="text"
             id={`.input1`}
@@ -547,6 +555,21 @@ class ManageAvailabilityCalendar extends Component {
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
+            rootClassName={css.defaultSiteInput}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <FieldTextInput
+            type="text"
+            id={`.input2`}
+            name="input2"
+            label={"Default number of sites:"}
+            labelId={".input2Label"}
+            rootClassName={css.defaultSiteInput}
+            isUncontrolled={true}
+            defaultValue={availabilityPlan.entries[0].seats}
+            onSeatChange={this.onDefaultSeatChange}
+            /*customErrorText={this.state.seatError}*/
           />
         </div>
       </div>

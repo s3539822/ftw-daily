@@ -76,6 +76,7 @@ const EditListingAvailabilityPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        listing={listing}
       />
     </div>
   );

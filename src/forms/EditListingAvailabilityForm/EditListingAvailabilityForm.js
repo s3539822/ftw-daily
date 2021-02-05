@@ -32,6 +32,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
+            listing,
           } = formRenderProps;
 
           const errorMessage = updateError ? (
@@ -53,6 +54,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   availability={availability}
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
+                  listing={listing}
                 />
               </div>
 
