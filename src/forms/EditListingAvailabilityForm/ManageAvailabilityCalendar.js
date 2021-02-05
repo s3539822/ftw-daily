@@ -20,6 +20,7 @@ import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
+import { NumberInput } from '../../components/FieldNumberInput/FieldNumberInput';
 
 // Constants
 
@@ -559,7 +560,7 @@ class ManageAvailabilityCalendar extends Component {
           />
         </div>
         <div className={css.inputWrapper}>
-          <FieldTextInput
+          <NumberInput
             type="text"
             id={`.input2`}
             name="input2"
