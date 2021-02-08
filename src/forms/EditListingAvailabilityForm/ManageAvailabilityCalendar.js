@@ -17,10 +17,14 @@ import {
 } from '../../util/data';
 import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
-import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
+import { FieldCurrencyInput, FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
-import { NumberInput } from '../../components/FieldNumberInput/FieldNumberInput';
+import FieldNumberInput, { NumberInput } from '../../components/FieldNumberInput/FieldNumberInput';
+import config from '../../config';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { Money } from 'sharetribe-flex-sdk/src/types';
 
 // Constants
 
@@ -452,6 +456,7 @@ class ManageAvailabilityCalendar extends Component {
       availabilityPlan,
       onMonthChanged,
       monthFormat,
+      intl,
       ...rest
     } = this.props;
     const { focused, date, currentMonth } = this.state;
@@ -476,6 +481,29 @@ class ManageAvailabilityCalendar extends Component {
 
     const monthName = currentMonth.format('MMMM');
     const classes = classNames(rootClassName || css.root, className);
+
+
+    /*const priceRequired = validators.required(
+      intl.formatMessage({
+        id: 'EditListingPricingForm.priceRequired',
+      })
+    );
+    const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+    const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+      intl.formatMessage(
+        {
+          id: 'EditListingPricingForm.priceTooLow',
+        },
+        {
+          minPrice: formatMoney(intl, minPrice),
+        }
+      ),
+      config.listingMinimumPriceSubUnits
+    );
+
+    const priceValidators = config.listingMinimumPriceSubUnits
+      ? validators.composeValidators(priceRequired, minPriceRequired)
+      : priceRequired;*/
 
     return (
       <div
@@ -546,7 +574,7 @@ class ManageAvailabilityCalendar extends Component {
 
         </div>
         <div className={css.inputWrapper}>
-          <FieldTextInput
+          {/*<FieldTextInput
             type="text"
             id={`.input1`}
             name="input1"
@@ -557,10 +585,27 @@ class ManageAvailabilityCalendar extends Component {
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
             rootClassName={css.defaultSiteInput}
+          />*/}
+          <FieldNumberInput
+            type="text"
+            id={`.input1`}
+            name="input1"
+            className={css.defaultSiteInput}
+            autoFocus
+            label={"No date selected"}
+            labelId={".input1Label"}
+            /*placeholder={pricePlaceholderMessage}*/
+            currencyConfig={config.currencyConfig}
+            /*validate={priceValidators}*/
+            defaultValue={this.state.seats}
+            isUncontrolled={true}
+            onSeatChange={this.onSeatChange}
+            customErrorText={this.state.seatError}
+            rootClassName={css.defaultSiteInput}
           />
         </div>
         <div className={css.inputWrapper}>
-          <NumberInput
+          {/*<NumberInput
             type="text"
             id={`.input2`}
             name="input2"
@@ -570,7 +615,18 @@ class ManageAvailabilityCalendar extends Component {
             isUncontrolled={true}
             defaultValue={availabilityPlan.entries[0].seats}
             onSeatChange={this.onDefaultSeatChange}
-            /*customErrorText={this.state.seatError}*/
+            customErrorText={this.state.seatError}
+          />*/}
+          <FieldNumberInput
+            type={"number"}
+            id={`.input2`}
+            name="input2"
+            className={css.defaultSiteInput}
+            autoFocus
+            label={"Default number of sites:"}
+            /*placeholder={pricePlaceholderMessage}*/
+            currencyConfig={config.currencyConfig}
+            /*validate={priceValidators}*/
           />
         </div>
       </div>

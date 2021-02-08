@@ -53,6 +53,7 @@ class NumberInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
+
     const initialValueIsMoney = input.value instanceof Money;
 
     if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
@@ -174,7 +175,7 @@ class NumberInputComponent extends Component {
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';
       const formattedValue = !isEmptyString
-        ? intl.formatNumber(ensureDotSeparator(truncatedValueString), currencyConfig)
+        ? intl.formatNumber(ensureDotSeparator(truncatedValueString))
         : '';
 
       this.setState({
@@ -196,8 +197,8 @@ class NumberInputComponent extends Component {
   }
 
   render() {
-    const { className, currencyConfig, defaultValue, placeholder, intl } = this.props;
-    const placeholderText = placeholder || intl.formatNumber(defaultValue, currencyConfig);
+    const { className, defaultValue, placeholder, intl } = this.props;
+    const placeholderText = placeholder || intl.formatNumber(defaultValue);
     return (
       <input
         className={className}

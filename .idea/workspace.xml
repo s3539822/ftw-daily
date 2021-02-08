@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/EditListingAvailabilityForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/EditListingAvailabilityForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +69,9 @@
       <workItem from="1611611771724" duration="4006000" />
       <workItem from="1611626416256" duration="1553000" />
       <workItem from="1612498699567" duration="7046000" />
+      <workItem from="1612670111795" duration="451000" />
+      <workItem from="1612670582797" duration="1900000" />
+      <workItem from="1612679793114" duration="1558000" />
     </task>
     <servers />
   </component>

@@ -22,7 +22,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             disabled,
             ready,
             handleSubmit,
-            //intl,
+            intl,
             invalid,
             pristine,
             saveActionMsg,
@@ -55,6 +55,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
                   listing={listing}
+                  intl={intl}
                 />
               </div>
 
