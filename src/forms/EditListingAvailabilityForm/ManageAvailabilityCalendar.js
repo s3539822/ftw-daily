@@ -383,7 +383,7 @@ class ManageAvailabilityCalendar extends Component {
     const date = this.state.date
     const seats = e.target.value
 
-    //Ensure date is elected
+    //Ensure date is selected
     if (date === null) {
       this.setState({seatError: "No date selected"})
       return
