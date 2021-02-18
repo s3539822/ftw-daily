@@ -353,8 +353,10 @@ class ManageAvailabilityCalendar extends Component {
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
     if (hasAvailabilityException) {
+      console.log("hello")
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
     } else {
+      console.log("hello1")
       this.updateSeatsSelector(date, 1)
     }
   }
@@ -482,29 +484,6 @@ class ManageAvailabilityCalendar extends Component {
     const monthName = currentMonth.format('MMMM');
     const classes = classNames(rootClassName || css.root, className);
 
-
-    /*const priceRequired = validators.required(
-      intl.formatMessage({
-        id: 'EditListingPricingForm.priceRequired',
-      })
-    );
-    const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
-    const minPriceRequired = validators.moneySubUnitAmountAtLeast(
-      intl.formatMessage(
-        {
-          id: 'EditListingPricingForm.priceTooLow',
-        },
-        {
-          minPrice: formatMoney(intl, minPrice),
-        }
-      ),
-      config.listingMinimumPriceSubUnits
-    );
-
-    const priceValidators = config.listingMinimumPriceSubUnits
-      ? validators.composeValidators(priceRequired, minPriceRequired)
-      : priceRequired;*/
-
     return (
       <div
         className={classes}
@@ -574,20 +553,7 @@ class ManageAvailabilityCalendar extends Component {
 
         </div>
         <div className={css.inputWrapper}>
-          {/*<FieldTextInput
-            type="text"
-            id={`.input1`}
-            name="input1"
-            label={"No date selected"}
-            labelId={".input1Label"}
-            defaultValue={this.state.seats}
-            isUncontrolled={true}
-            onSeatChange={this.onSeatChange}
-            customErrorText={this.state.seatError}
-            rootClassName={css.defaultSiteInput}
-          />*/}
           <FieldNumberInput
-            type="text"
             id={`.input1`}
             name="input1"
             className={css.defaultSiteInput}
@@ -605,28 +571,15 @@ class ManageAvailabilityCalendar extends Component {
           />
         </div>
         <div className={css.inputWrapper}>
-          {/*<NumberInput
-            type="text"
-            id={`.input2`}
-            name="input2"
-            label={"Default number of sites:"}
-            labelId={".input2Label"}
-            rootClassName={css.defaultSiteInput}
-            isUncontrolled={true}
-            defaultValue={availabilityPlan.entries[0].seats}
-            onSeatChange={this.onDefaultSeatChange}
-            customErrorText={this.state.seatError}
-          />*/}
           <FieldNumberInput
-            type={"number"}
             id={`.input2`}
             name="input2"
+            initValue={availabilityPlan.entries[0].seats}
+            onSeatChange={this.onDefaultSeatChange}
             className={css.defaultSiteInput}
             autoFocus
             label={"Default number of sites:"}
-            /*placeholder={pricePlaceholderMessage}*/
             currencyConfig={config.currencyConfig}
-            /*validate={priceValidators}*/
           />
         </div>
       </div>

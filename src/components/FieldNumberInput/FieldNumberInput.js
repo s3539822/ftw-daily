@@ -97,8 +97,6 @@ class NumberInputComponent extends Component {
     }
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.onInputBlur = this.onInputBlur.bind(this);
-    this.onInputFocus = this.onInputFocus.bind(this);
     this.updateValues = this.updateValues.bind(this);
   }
 
@@ -108,51 +106,14 @@ class NumberInputComponent extends Component {
     // Update value strings on state
     const { unformattedValue } = this.updateValues(event);
     // Notify parent component about current price change
-    const price = getPrice(ensureDotSeparator(unformattedValue), this.props.currencyConfig);
-    this.props.input.onChange(price);
-  }
+    this.props.input.onChange(unformattedValue);
 
-  onInputBlur(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const {
-      currencyConfig,
-      input: { onBlur },
-    } = this.props;
-    this.setState(prevState => {
-      if (onBlur) {
-        // If parent component has provided onBlur function, call it with current price.
-        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currencyConfig);
-        onBlur(price);
-      }
-      return {
-        value: prevState.formattedValue,
-      };
-    });
-  }
-
-  onInputFocus(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const {
-      currencyConfig,
-      input: { onFocus },
-    } = this.props;
-    this.setState(prevState => {
-      if (onFocus) {
-        // If parent component has provided onFocus function, call it with current price.
-        const price = getPrice(ensureDotSeparator(prevState.unformattedValue), currencyConfig);
-        onFocus(price);
-      }
-      return {
-        value: prevState.unformattedValue,
-      };
-    });
+    this.props.onSeatChange(event)
   }
 
   updateValues(event) {
     try {
-      const { currencyConfig, intl } = this.props;
+      const { intl } = this.props;
       const targetValue = event.target.value.trim();
       const isEmptyString = targetValue === '';
       const valueOrZero = isEmptyString ? '0' : targetValue;
@@ -164,13 +125,13 @@ class NumberInputComponent extends Component {
       const isSafeValue =
         isEmptyString || (targetDecimalValue.isPositive() && isSafeNumber(targetDecimalValue));
       if (!isSafeValue) {
-        throw new Error(`Unsafe money value: ${targetValue}`);
+        throw new Error(`Unsafe site value: ${targetValue}`);
       }
 
       // truncate decimals to subunit precision: 10000.999 => 10000.99
       const truncatedValueString = truncateToSubUnitPrecision(
         valueOrZero,
-        unitDivisor(currencyConfig.currency),
+        1,
         this.state.usesComma
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';
@@ -201,13 +162,11 @@ class NumberInputComponent extends Component {
     const placeholderText = placeholder || intl.formatNumber(defaultValue);
     return (
       <input
+        type="text"
         className={className}
         {...allowedInputProps(this.props)}
         value={this.state.value}
         onChange={this.onInputChange}
-        onBlur={this.onInputBlur}
-        onFocus={this.onInputFocus}
-        type="text"
         placeholder={placeholderText}
       />
     );
@@ -242,7 +201,7 @@ NumberInputComponent.propTypes = {
 export const NumberInput = injectIntl(NumberInputComponent);
 
 const FieldNumberInputComponent = props => {
-  const { rootClassName, className, id, label, labelId, input, meta, ...rest } = props;
+  const { rootClassName, className, id, label, onSeatChange, labelId, input, meta, ...rest } = props;
 
   if (label && !id) {
     throw new Error('id required when a label is given');
@@ -259,7 +218,7 @@ const FieldNumberInputComponent = props => {
     [css.inputError]: hasError,
   });
 
-  const inputProps = { className: inputClasses, id, input, ...rest };
+  const inputProps = { className: inputClasses, id, input, onSeatChange, ...rest };
   const classes = classNames(rootClassName, className);
   return (
     <div className={classes}>
