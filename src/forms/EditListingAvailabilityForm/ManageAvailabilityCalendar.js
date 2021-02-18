@@ -202,7 +202,7 @@ const makeDraftException = (exceptions, start, end, seats) => {
 const dateString = (date) => {
   const res = date._d.toString().split(" ");
 
-  return "Seats on: " + res[0] + " " + res[1] + " " + res[2] + ", " + res[3]
+  return `Seats on: ${res[0]} ${res[1]} ${res[2]}, ${res[3]}`
 }
 
 ////////////////////////////////
@@ -224,6 +224,8 @@ class ManageAvailabilityCalendar extends Component {
       seatError: null,
     };
 
+    this.onDefaultSeatChange = this.onDefaultSeatChange.bind(this);
+    this.updateDefaultSeats = this.updateDefaultSeats.bind(this);
     this.onSeatChange = this.onSeatChange.bind(this);
     this.updateSeatsSelector = this.updateSeatsSelector.bind(this);
     this.fetchMonthData = this.fetchMonthData.bind(this);
@@ -231,6 +233,7 @@ class ManageAvailabilityCalendar extends Component {
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onMonthClick = this.onMonthClick.bind(this);
+    this.seatsInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -241,12 +244,24 @@ class ManageAvailabilityCalendar extends Component {
   }
 
   updateSeatsSelector(date, seats) {
+
+
+    /*this.seatsInputRef.current.updateValues1(seats)*/
+
+
     document.getElementById(".input1Label").innerHTML = dateString(date);
 
     if (seats === 0)
       document.getElementById(".input1").value = "Not available";
     else
       document.getElementById(".input1").value = seats;
+  }
+
+  updateDefaultSeats(seats) {
+    if (seats === 0)
+      document.getElementById(".input2").value = "Not available";
+    else
+      document.getElementById(".input2").value = seats;
   }
 
   fetchMonthData(monthMoment) {
@@ -300,19 +315,15 @@ class ManageAvailabilityCalendar extends Component {
       const id = currentException.availabilityException.id;
       const isResetToPlanSeats = seatsFromPlan === seats;
 
-      console.log("here1")
-
       if (isResetToPlanSeats) {
         // Delete the exception, if the exception is redundant
         // (it has the same content as what user has in the plan).
-        console.log("here2")
         this.props.availability.onDeleteAvailabilityException({
           id,
           currentException: exception,
           seats: seatsFromPlan,
         });
       } else {
-        console.log("here3")
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
@@ -323,7 +334,6 @@ class ManageAvailabilityCalendar extends Component {
           });
       }
     } else {
-      console.log("here4")
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params);
@@ -344,10 +354,25 @@ class ManageAvailabilityCalendar extends Component {
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
     if (hasAvailabilityException) {
+      console.log("hello")
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
     } else {
+      console.log("hello1")
       this.updateSeatsSelector(date, 1)
     }
+  }
+
+  onDefaultSeatChange(e) {
+    e.preventDefault()
+
+    const {listing} = this.props
+    const seats = e.target.value
+
+    listing.attributes.availabilityPlan.entries.forEach((val) => {
+      val.seats = seats
+    })
+
+    this.updateDefaultSeats(seats)
   }
 
   onSeatChange(e) {
@@ -359,7 +384,7 @@ class ManageAvailabilityCalendar extends Component {
     const date = this.state.date
     const seats = e.target.value
 
-    //Ensure date is elected
+    //Ensure date is selected
     if (date === null) {
       this.setState({seatError: "No date selected"})
       return
@@ -434,6 +459,7 @@ class ManageAvailabilityCalendar extends Component {
       availabilityPlan,
       onMonthChanged,
       monthFormat,
+      intl,
       ...rest
     } = this.props;
     const { focused, date, currentMonth } = this.state;
@@ -525,10 +551,12 @@ class ManageAvailabilityCalendar extends Component {
               />
             </p>
           ) : null}
+
         </div>
-        <div className={css.calendarWrapper}>
+        <div className={css.inputWrapper}>
           <FieldTextInput
-            type="text"
+            type="number"
+            min="0"
             id={`.input1`}
             name="input1"
             label={"No date selected"}
@@ -537,6 +565,23 @@ class ManageAvailabilityCalendar extends Component {
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <FieldTextInput
+            type="number"
+            min="0"
+            id={`.input2`}
+            name="input2"
+            label={"Default number of sites:"}
+            labelId={".input1Label"}
+            defaultValue={availabilityPlan.entries[0].seats}
+            isUncontrolled={true}
+            onSeatChange={this.onDefaultSeatChange}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, func, object, shape, string } from 'prop-types';
+import { bool, func, number, object, shape, string } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError, ExpandingTextarea } from '../../components';
@@ -19,6 +19,7 @@ class FieldTextInputComponent extends Component {
       id,
       label,
       labelId,
+      rows,
       input,
       meta,
       onUnmount,
@@ -63,7 +64,7 @@ class FieldTextInputComponent extends Component {
       ? {
           className: inputClasses,
           id,
-          rows: 1,
+          rows: rows,
           maxLength,
           ...refMaybe,
           ...inputWithoutType,
@@ -73,6 +74,7 @@ class FieldTextInputComponent extends Component {
       ? {
           className: inputClasses,
           id,
+          rows: rows,
           type,
           defaultValue,
           ...refMaybe,
@@ -81,6 +83,7 @@ class FieldTextInputComponent extends Component {
         }
       : { className: inputClasses,
           id,
+          rows: rows,
           type,
           ...refMaybe,
           ...input,
@@ -104,6 +107,7 @@ FieldTextInputComponent.defaultProps = {
   inputRootClass: null,
   onUnmount: null,
   customErrorText: null,
+  rows: 1,
   id: null,
   label: null,
   isUncontrolled: false,
@@ -125,6 +129,7 @@ FieldTextInputComponent.propTypes = {
   // the label can reference the input in the `for` attribute
   id: string,
   label: string,
+  rows: number,
 
   // Uncontrolled input uses defaultValue prop, but doesn't pass value from form to the field.
   // https://reactjs.org/docs/uncontrolled-components.html#default-values

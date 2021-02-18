@@ -9,6 +9,8 @@ import { EditListingAvailabilityForm } from '../../forms';
 
 import css from './EditListingAvailabilityPanel.module.css';
 
+const DEFAULT_SEATS = 1;
+
 const EditListingAvailabilityPanel = props => {
   const {
     className,
@@ -31,13 +33,13 @@ const EditListingAvailabilityPanel = props => {
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
-      { dayOfWeek: 'mon', seats: 1 },
-      { dayOfWeek: 'tue', seats: 1 },
-      { dayOfWeek: 'wed', seats: 1 },
-      { dayOfWeek: 'thu', seats: 1 },
-      { dayOfWeek: 'fri', seats: 1 },
-      { dayOfWeek: 'sat', seats: 1 },
-      { dayOfWeek: 'sun', seats: 1 },
+      { dayOfWeek: 'mon', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'tue', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'wed', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'thu', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'fri', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'sat', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'sun', seats: DEFAULT_SEATS },
     ],
   };
   const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
@@ -74,6 +76,7 @@ const EditListingAvailabilityPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        listing={listing}
       />
     </div>
   );

@@ -3,7 +3,7 @@
 .root {
   @apply --marketplaceH4FontStyles;
   margin-top: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   color: var(--failColor);
   overflow: hidden;
 

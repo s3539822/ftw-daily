@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api-util/lineItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api-util/lineItems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/initiate-privileged.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/initiate-privileged.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/BookingDatesForm/BookingDatesForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.example.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FieldNumberInput/FieldNumberInput.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +19,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1mJd8Eq6eCGv9NzcYpOutOJdcRN" />
   <component name="ProjectLevelVcsManager">
@@ -30,7 +40,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/forms/BookingDatesForm" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210219_0002" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -38,10 +49,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/containers/HelpPage" />
+      <recent name="$PROJECT_DIR$/src/containers/ContactPage" />
+      <recent name="$PROJECT_DIR$/src/forms" />
       <recent name="$PROJECT_DIR$/src/forms/BookingDatesForm" />
-      <recent name="$PROJECT_DIR$/src/components/Logo" />
-      <recent name="$PROJECT_DIR$/src/assets" />
-      <recent name="$PROJECT_DIR$/src/components/SectionLocations/images" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,6 +69,14 @@
       <workItem from="1610238182727" duration="820000" />
       <workItem from="1610348231936" duration="2439000" />
       <workItem from="1610363069543" duration="1824000" />
+      <workItem from="1611611771724" duration="4006000" />
+      <workItem from="1611626416256" duration="1553000" />
+      <workItem from="1612498699567" duration="7046000" />
+      <workItem from="1612670111795" duration="451000" />
+      <workItem from="1612670582797" duration="1900000" />
+      <workItem from="1612679793114" duration="1656000" />
+      <workItem from="1613631142887" duration="10342000" />
+      <workItem from="1613686942471" duration="4521000" />
     </task>
     <servers />
   </component>
