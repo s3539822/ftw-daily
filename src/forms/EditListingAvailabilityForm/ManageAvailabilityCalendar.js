@@ -563,7 +563,7 @@ class ManageAvailabilityCalendar extends Component {
             /*placeholder={pricePlaceholderMessage}*/
             currencyConfig={config.currencyConfig}
             /*validate={priceValidators}*/
-            defaultValue={this.state.seats}
+            initValue={this.state.seats}
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}

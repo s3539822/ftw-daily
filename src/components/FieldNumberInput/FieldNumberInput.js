@@ -34,25 +34,10 @@ const allowedInputProps = allProps => {
   return inputProps;
 };
 
-// Convert unformatted value (e.g. 10,00) to Money (or null)
-const getPrice = (unformattedValue, currencyConfig) => {
-  const isEmptyString = unformattedValue === '';
-  try {
-    return isEmptyString
-      ? null
-      : new Money(
-          convertUnitToSubUnit(unformattedValue, unitDivisor(currencyConfig.currency)),
-          currencyConfig.currency
-        );
-  } catch (e) {
-    return null;
-  }
-};
-
 class NumberInputComponent extends Component {
   constructor(props) {
     super(props);
-    const { currencyConfig, defaultValue, input, intl } = props;
+    const { currencyConfig, initValue, input, intl } = props;
 
     const initialValueIsMoney = input.value instanceof Money;
 
@@ -62,7 +47,7 @@ class NumberInputComponent extends Component {
       throw e;
     }
 
-    const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue;
+    const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : initValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
@@ -76,23 +61,18 @@ class NumberInputComponent extends Component {
       const unformattedValue = hasInitialValue
         ? truncateToSubUnitPrecision(
             ensureSeparator(initialValue.toString(), usesComma),
-            unitDivisor(currencyConfig.currency),
+            1,
             usesComma
           )
         : '';
-      // Formatted value fully localized currency string ("$1,000.99")
-      const formattedValue = hasInitialValue
-        ? intl.formatNumber(ensureDotSeparator(unformattedValue), currencyConfig)
-        : '';
 
       this.state = {
-        formattedValue,
         unformattedValue,
-        value: formattedValue,
+        value: unformattedValue,
         usesComma,
       };
     } catch (e) {
-      log.error(e, 'currency-input-init-failed', { currencyConfig, defaultValue, initialValue });
+      log.error(e, 'currency-input-init-failed', { currencyConfig, initValue, initialValue });
       throw e;
     }
 
@@ -108,6 +88,7 @@ class NumberInputComponent extends Component {
     // Notify parent component about current price change
     this.props.input.onChange(unformattedValue);
 
+    //Call parent function
     this.props.onSeatChange(event)
   }
 
@@ -135,25 +116,21 @@ class NumberInputComponent extends Component {
         this.state.usesComma
       );
       const unformattedValue = !isEmptyString ? truncatedValueString : '';
-      const formattedValue = !isEmptyString
-        ? intl.formatNumber(ensureDotSeparator(truncatedValueString))
-        : '';
 
       this.setState({
-        formattedValue,
         value: unformattedValue,
         unformattedValue,
       });
 
-      return { formattedValue, value: unformattedValue, unformattedValue };
+      return { value: unformattedValue, unformattedValue };
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
 
       // If an error occurs while filling input field, use previous values
       // This ensures that string like '12.3r' doesn't end up to a state.
-      const { formattedValue, unformattedValue, value } = this.state;
-      return { formattedValue, unformattedValue, value };
+      const { unformattedValue, value } = this.state;
+      return { unformattedValue, value };
     }
   }
 
@@ -201,7 +178,7 @@ NumberInputComponent.propTypes = {
 export const NumberInput = injectIntl(NumberInputComponent);
 
 const FieldNumberInputComponent = props => {
-  const { rootClassName, className, id, label, onSeatChange, labelId, input, meta, ...rest } = props;
+  const { rootClassName, className, id, label, initValue, onSeatChange, labelId, input, meta, ...rest } = props;
 
   if (label && !id) {
     throw new Error('id required when a label is given');
@@ -218,7 +195,7 @@ const FieldNumberInputComponent = props => {
     [css.inputError]: hasError,
   });
 
-  const inputProps = { className: inputClasses, id, input, onSeatChange, ...rest };
+  const inputProps = { className: inputClasses, id, input, initValue, onSeatChange, ...rest };
   const classes = classNames(rootClassName, className);
   return (
     <div className={classes}>
