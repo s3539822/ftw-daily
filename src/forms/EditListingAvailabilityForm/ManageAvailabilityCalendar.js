@@ -17,14 +17,9 @@ import {
 } from '../../util/data';
 import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
-import { FieldCurrencyInput, FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
+import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
-import FieldNumberInput, { NumberInput } from '../../components/FieldNumberInput/FieldNumberInput';
-import config from '../../config';
-import * as validators from '../../util/validators';
-import { formatMoney } from '../../util/currency';
-import { Money } from 'sharetribe-flex-sdk/src/types';
 
 // Constants
 
@@ -238,6 +233,7 @@ class ManageAvailabilityCalendar extends Component {
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onMonthClick = this.onMonthClick.bind(this);
+    this.seatsInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -248,6 +244,11 @@ class ManageAvailabilityCalendar extends Component {
   }
 
   updateSeatsSelector(date, seats) {
+
+
+    /*this.seatsInputRef.current.updateValues1(seats)*/
+
+
     document.getElementById(".input1Label").innerHTML = dateString(date);
 
     if (seats === 0)
@@ -553,33 +554,34 @@ class ManageAvailabilityCalendar extends Component {
 
         </div>
         <div className={css.inputWrapper}>
-          <FieldNumberInput
+          <FieldTextInput
+            type="number"
+            min="0"
             id={`.input1`}
             name="input1"
-            className={css.defaultSiteInput}
-            autoFocus
             label={"No date selected"}
             labelId={".input1Label"}
-            /*placeholder={pricePlaceholderMessage}*/
-            currencyConfig={config.currencyConfig}
-            /*validate={priceValidators}*/
-            initValue={this.state.seats}
+            defaultValue={this.state.seats}
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
             rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
           />
         </div>
         <div className={css.inputWrapper}>
-          <FieldNumberInput
+          <FieldTextInput
+            type="number"
+            min="0"
             id={`.input2`}
             name="input2"
-            initValue={availabilityPlan.entries[0].seats}
-            onSeatChange={this.onDefaultSeatChange}
-            className={css.defaultSiteInput}
-            autoFocus
             label={"Default number of sites:"}
-            currencyConfig={config.currencyConfig}
+            labelId={".input1Label"}
+            defaultValue={availabilityPlan.entries[0].seats}
+            isUncontrolled={true}
+            onSeatChange={this.onDefaultSeatChange}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
           />
         </div>
       </div>

@@ -386,6 +386,7 @@
     flex-grow: 1;
     position: relative;
     width: 50%;
+    max-width: 50%;
     margin-bottom: 24px;
     display: inline-block;
   }
