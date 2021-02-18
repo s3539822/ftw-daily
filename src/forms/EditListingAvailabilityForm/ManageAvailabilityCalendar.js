@@ -207,7 +207,7 @@ const makeDraftException = (exceptions, start, end, seats) => {
 const dateString = (date) => {
   const res = date._d.toString().split(" ");
 
-  return "Seats on: " + res[0] + " " + res[1] + " " + res[2] + ", " + res[3]
+  return `Seats on: ${res[0]} ${res[1]} ${res[2]}, ${res[3]}`
 }
 
 ////////////////////////////////
