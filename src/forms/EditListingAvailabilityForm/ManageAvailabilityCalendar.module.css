@@ -321,6 +321,16 @@
     font-size: 16px;
     line-height: 16px;
   }
+  .inputWrapper {
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .defaultSiteInput {
+    max-width: 100%;
+  }
 }
 
 /* Standard break points */
@@ -372,6 +382,16 @@
   .legendText {
     margin: 0;
   }
+  .inputWrapper {
+    flex-grow: 1;
+    position: relative;
+    width: 50%;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .defaultSiteInput {
+    max-width: 80%;
+  }
 }
 
 @media (--viewportLarge) {
@@ -399,16 +419,4 @@
   position: relative;
   width: 100%;
   margin-bottom: 24px;
-}
-
-.inputWrapper {
-  flex-grow: 1;
-  position: relative;
-  width: 50%;
-  margin-bottom: 24px;
-  display: inline-block;
-}
-
-.defaultSiteInput {
-  max-width: 80%;
 }
