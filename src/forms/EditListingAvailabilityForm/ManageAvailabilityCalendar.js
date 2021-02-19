@@ -557,6 +557,7 @@ class ManageAvailabilityCalendar extends Component {
           <FieldTextInput
             type="number"
             min="0"
+            step="1"
             id={`.input1`}
             name="input1"
             label={"No date selected"}
@@ -573,6 +574,7 @@ class ManageAvailabilityCalendar extends Component {
           <FieldTextInput
             type="number"
             min="0"
+            step="1"
             id={`.input2`}
             name="input2"
             label={"Default number of sites:"}
