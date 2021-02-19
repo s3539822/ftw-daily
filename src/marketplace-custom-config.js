@@ -177,6 +177,7 @@ export const filters = [
         { key: 'lake', label: 'Lake' },
         { key: 'forest', label: 'Forest' },
         { key: 'garden', label: 'Garden' },
+        { key: 'city', label: 'City' },
       ],
     },
   },

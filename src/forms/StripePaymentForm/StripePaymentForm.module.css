@@ -166,9 +166,23 @@
   }
 }
 
-.paymentInfo {
+.paymentInfoPaymentSelector {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
+  text-align: center;
+  padding: 0 42px;
+  margin: -28px 0 34px 0;
+
+  @media (--viewportLarge) {
+    /* TODO this is ugly overwrite to fix unconsistent font styles */
+    font-size: 14px;
+    padding: 0;
+  }
+}
+
+.paymentInfo {
+  @apply --marketplaceH5FontStyles;
+  color: #2a3d4b;
   text-align: center;
   padding: 0 42px;
   margin: 28px 0 0 0;
