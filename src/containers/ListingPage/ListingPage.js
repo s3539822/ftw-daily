@@ -58,6 +58,7 @@ import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionViewMaybe from './SectionViewMaybe';
 import css from './ListingPage.module.css';
+import SectionCapacity from './SectionCapacity';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -392,6 +393,14 @@ export class ListingPageComponent extends Component {
           <span className={css.separator}>•</span>
         </span>
       ) : null;
+    const capacityOptions = findOptionsForSelectFilter(
+      'capacity',
+      filterConfig
+    );
+    const capacityTypeOptions = findOptionsForSelectFilter(
+      'capacity_type',
+      filterConfig
+    );
 
     return (
       <Page
@@ -443,6 +452,7 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionViewMaybe options={viewOptions} publicData={publicData} />
+                  <SectionCapacity publicData={publicData} options={capacityOptions} typeOptions={capacityTypeOptions} />
 
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />

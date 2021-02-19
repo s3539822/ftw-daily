@@ -32,9 +32,13 @@ export const EditListingCapacityFormComponent = props => (
         updateError,
         updateInProgress,
         capacityOptions,
+        capacityTypeOptions,
       } = fieldRenderProps;
 
       const capacityPlaceholder = intl.formatMessage({
+        id: 'EditListingCapacityForm.capacityPlaceholder',
+      });
+      const capacityTypePlaceholder = intl.formatMessage({
         id: 'EditListingCapacityForm.capacityPlaceholder',
       });
 
@@ -49,6 +53,11 @@ export const EditListingCapacityFormComponent = props => (
           id: 'EditListingCapacityForm.capacityRequired',
         })
       );
+      const capacityTypeRequired = required(
+        intl.formatMessage({
+          id: 'EditListingCapacityForm.capacityTypeRequired',
+        })
+      );
 
       const classes = classNames(css.root, className);
       const submitReady = updated && pristine;
@@ -59,19 +68,40 @@ export const EditListingCapacityFormComponent = props => (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
 
-          <FieldSelect
-            className={css.capacity}
-            name="capacity"
-            id="capacity"
-            validate={capacityRequired}
-          >
-            <option disabled value="">{capacityPlaceholder}</option>
-            {capacityOptions.map(c => (
-              <option key={c.key} value={c.key}>
-                {c.label}
-              </option>
-            ))}
-          </FieldSelect>
+          <div className={css.groupWrapper}>
+            <div className={css.inputWrapper}>
+              <label>Amount</label>
+              <FieldSelect
+                className={css.capacity}
+                name="capacity"
+                id="capacity"
+                validate={capacityRequired}
+              >
+                <option disabled value="">{capacityPlaceholder}</option>
+                {capacityOptions.map(c => (
+                  <option key={c.key} value={c.key}>
+                    {c.label}
+                  </option>
+                ))}
+              </FieldSelect>
+            </div>
+            <div className={css.inputWrapper}>
+              <label>Type</label>
+              <FieldSelect
+                className={css.capacity}
+                name="capacity_type"
+                id="capacity_type"
+                validate={capacityTypeRequired}
+              >
+                <option disabled value="">{capacityTypePlaceholder}</option>
+                {capacityTypeOptions.map(c => (
+                  <option key={c.key} value={c.key}>
+                    {c.label}
+                  </option>
+                ))}
+              </FieldSelect>
+            </div>
+          </div>
 
           <Button
             className={css.submitButton}
@@ -101,6 +131,12 @@ EditListingCapacityFormComponent.propTypes = {
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   capacityOptions: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ).isRequired,
+  capacityTypeOptions: arrayOf(
     shape({
       key: string.isRequired,
       label: string.isRequired,

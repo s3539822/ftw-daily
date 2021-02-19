@@ -44,18 +44,23 @@ const EditListingCapacityPanel = props => {
     'capacity',
     config.custom.filters
   );
+  const capacityTypeOptions = findOptionsForSelectFilter(
+    'capacity_type',
+    config.custom.filters
+  );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingCapacityForm
         className={css.form}
-        initialValues={{ capacity: publicData.capacity }}
+        initialValues={{ capacity: publicData.capacity, capacity_type: publicData.capacity_type }}
         onSubmit={values => {
-          const { capacity } = values;
+          const { capacity, capacity_type } = values;
           const updateValues = {
             publicData: {
               capacity,
+              capacity_type,
             },
           };
           onSubmit(updateValues);
@@ -66,6 +71,7 @@ const EditListingCapacityPanel = props => {
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
         capacityOptions={capacityOptions}
+        capacityTypeOptions={capacityTypeOptions}
       />
     </div>
   );

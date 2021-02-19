@@ -196,6 +196,19 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'capacity_type',
+    label: 'Capacity Type',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_capacity_type'],
+    config: {
+      options: [
+        { key: 'people', label: 'People' },
+        { key: 'caravans', label: 'Caravan/s' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {

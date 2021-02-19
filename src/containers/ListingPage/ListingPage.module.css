@@ -584,3 +584,27 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.sectionCapacity {
+  padding: 0 24px;
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 36px;
+  }
+}
+
+.capacityTitle {
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+}
+
