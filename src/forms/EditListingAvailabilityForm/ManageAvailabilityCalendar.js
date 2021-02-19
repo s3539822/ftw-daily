@@ -20,6 +20,7 @@ import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
+import { ensureSeparator, truncateToSubUnitPrecision, unitDivisor } from '../../util/currency';
 
 // Constants
 
@@ -364,6 +365,14 @@ class ManageAvailabilityCalendar extends Component {
 
   onDefaultSeatChange(e) {
     e.preventDefault()
+    e.stopPropagation()
+    const targetValue = event.target.value.trim();
+
+    const unformattedValue = truncateToSubUnitPrecision(
+        ensureSeparator(targetValue.toString(), true),
+        unitDivisor(currencyConfig.currency),
+        true
+      );
 
     const {listing} = this.props
     const seats = e.target.value
