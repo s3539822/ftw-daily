@@ -5,11 +5,16 @@ import { FormattedMessage } from 'react-intl';
 import css from './ListingPage.module.css';
 
 const SectionCapacity = props => {
-  const { publicData, options } = props;
+  const { publicData, options, typeOptions } = props;
 
   const capacity = publicData.capacity;
   const capacityOption = options.find(
     option => option.key === capacity
+  );
+
+  const capacityType = publicData.capacity_type;
+  const capacityTypeOption = typeOptions.find(
+    option => option.key === capacityType
   );
 
   return capacityOption ? (
@@ -17,13 +22,14 @@ const SectionCapacity = props => {
       <h2 className={css.capacityTitle}>
         <FormattedMessage id="ListingPage.capacityTitle" />
       </h2>
-      <p className={css.capacity}>{capacityOption.label}</p>
+      <p className={css.capacity}>{capacityOption.label} {capacityTypeOption.label}</p>
     </div>
   ) : null;
 };
 
 SectionCapacity.propTypes = {
   options: array.isRequired,
+  typeOptions: array.isRequired,
   publicData: shape({
     capacity: string,
   }).isRequired,

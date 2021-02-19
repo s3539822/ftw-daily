@@ -201,6 +201,7 @@
   "EditListingAvailabilityPanel.title": "Edit the availability of {listingTitle}",
   "EditListingAvailabilityPanel.createListingTitle": "When is it available?",
   "EditListingCapacityForm.capacityRequired": "You need to select a capacity for your site.",
+  "EditListingCapacityForm.capacityTypeRequired": "You need to select a capacity type for your site.",
   "EditListingCapacityForm.capacityPlaceholder": "Whats the capacity of your site?",
   "EditListingCapacityForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingCapacityPanel.title": "Edit capacity of {listingTitle}",

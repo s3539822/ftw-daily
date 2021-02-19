@@ -397,6 +397,10 @@ export class ListingPageComponent extends Component {
       'capacity',
       filterConfig
     );
+    const capacityTypeOptions = findOptionsForSelectFilter(
+      'capacity_type',
+      filterConfig
+    );
 
     return (
       <Page
@@ -448,7 +452,7 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionViewMaybe options={viewOptions} publicData={publicData} />
-                  <SectionCapacity publicData={publicData} options={capacityOptions} />
+                  <SectionCapacity publicData={publicData} options={capacityOptions} typeOptions={capacityTypeOptions} />
 
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
