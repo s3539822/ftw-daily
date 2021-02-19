@@ -65,16 +65,26 @@ export class BookingDatesFormComponent extends Component {
 
     const time = this.props.timeSlots
 
+    /* Check for required params */
     if (time !== undefined && time !== null && startDate !== undefined && endDate !== undefined) {
+
+      /* Early start to include check-in night */
       const earlyStart = moment(startDate).subtract(2,'h')
+      /* Early end to exclude check-out night */
+      const earlyEnd = moment(endDate).subtract(1,'d')
 
+      /* Temp minimum seat value */
+      let tempMinSeats = Infinity;
+
+      /* Loop through nights of booking and find min seats across all nights */
       time.map((value) => {
-        if (moment(value.attributes.start).isBetween(earlyStart, endDate)) {
-
-          if (value.attributes.seats < this.state.leastSiteAvail)
-            this.state.leastSiteAvail = value.attributes.seats
-        }
+        if (moment(value.attributes.start).isBetween(earlyStart, earlyEnd))
+          if (value.attributes.seats < tempMinSeats)
+            tempMinSeats = value.attributes.seats;
       })
+
+      /* Update state */
+      this.state.leastSiteAvail = tempMinSeats
     }
 
     if (seats === undefined)

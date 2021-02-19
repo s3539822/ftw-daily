@@ -22,7 +22,10 @@ import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 import css from './ManageAvailabilityCalendar.module.css';
 
 // Constants
-
+const SEATS_INPUT_ID = ".seatsInput"
+const SEATS_INPUT_LABEL_ID = ".seatsInputLabel"
+const DEFAULT_SEATS_INPUT_ID = ".defaultSeatsInput"
+const DEFAULT_SEATS_INPUT_LABEL_ID = ".defaultSeatsInputLabel"
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;
 const MAX_BOOKINGS_RANGE = 180;
@@ -202,7 +205,7 @@ const makeDraftException = (exceptions, start, end, seats) => {
 const dateString = (date) => {
   const res = date._d.toString().split(" ");
 
-  return "Seats on: " + res[0] + " " + res[1] + " " + res[2] + ", " + res[3]
+  return `Seats on: ${res[0]} ${res[1]} ${res[2]}, ${res[3]}`
 }
 
 ////////////////////////////////
@@ -222,8 +225,11 @@ class ManageAvailabilityCalendar extends Component {
       date: null,
       seats: "-",
       seatError: null,
+      defaultSeatError: null,
     };
 
+    this.onDefaultSeatChange = this.onDefaultSeatChange.bind(this);
+    this.updateDefaultSeats = this.updateDefaultSeats.bind(this);
     this.onSeatChange = this.onSeatChange.bind(this);
     this.updateSeatsSelector = this.updateSeatsSelector.bind(this);
     this.fetchMonthData = this.fetchMonthData.bind(this);
@@ -231,6 +237,7 @@ class ManageAvailabilityCalendar extends Component {
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onMonthClick = this.onMonthClick.bind(this);
+    this.seatsInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -241,12 +248,19 @@ class ManageAvailabilityCalendar extends Component {
   }
 
   updateSeatsSelector(date, seats) {
-    document.getElementById(".input1Label").innerHTML = dateString(date);
+    document.getElementById(SEATS_INPUT_LABEL_ID).innerHTML = dateString(date);
 
     if (seats === 0)
-      document.getElementById(".input1").value = "Not available";
+      document.getElementById(SEATS_INPUT_ID).value = "Not available";
     else
-      document.getElementById(".input1").value = seats;
+      document.getElementById(SEATS_INPUT_ID).value = seats;
+  }
+
+  updateDefaultSeats(seats) {
+    if (seats === 0)
+      document.getElementById(DEFAULT_SEATS_INPUT_ID).value = "Not available";
+    else
+      document.getElementById(DEFAULT_SEATS_INPUT_ID).value = seats;
   }
 
   fetchMonthData(monthMoment) {
@@ -329,7 +343,7 @@ class ManageAvailabilityCalendar extends Component {
     this.setState({ date });
     this.setState({seatError: null})
 
-    const { availability } = this.props;
+    const { availability, listing } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
@@ -339,14 +353,44 @@ class ManageAvailabilityCalendar extends Component {
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
     if (hasAvailabilityException) {
-      this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
+      //Set to availabilityPlan exception
+      this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats);
     } else {
-      this.updateSeatsSelector(date, 1)
+      //Set to availabilityPlan default
+      this.updateSeatsSelector(date, listing.attributes.availabilityPlan.entries[0].seats);
     }
+  }
+
+  onDefaultSeatChange(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    //Reset error string
+    this.setState({defaultSeatError: null});
+
+    const {listing} = this.props;
+    const seats = e.target.value;
+
+    //Ensure seat is a positive integer
+    if (!(/^-?\d+$/.test(seats)) || parseInt(seats, 10) < 0) {
+      this.setState({defaultSeatError: "Enter a valid number"});
+      return;
+    }
+
+    if (seats === listing.attributes.availabilityPlan.entries[0].seats)
+      return;
+
+    //Update listings availabilityPLan
+    listing.attributes.availabilityPlan.entries.forEach((val) => {
+      val.seats = seats;
+    })
+
+    this.updateDefaultSeats(seats);
   }
 
   onSeatChange(e) {
     e.preventDefault()
+    e.stopPropagation()
 
     //Reset error string
     this.setState({seatError: null})
@@ -354,7 +398,7 @@ class ManageAvailabilityCalendar extends Component {
     const date = this.state.date
     const seats = e.target.value
 
-    //Ensure date is elected
+    //Ensure date is selected
     if (date === null) {
       this.setState({seatError: "No date selected"})
       return
@@ -365,6 +409,9 @@ class ManageAvailabilityCalendar extends Component {
       this.setState({seatError: "Enter a valid number"})
       return;
     }
+
+    if (seats === this.state.seats)
+      return
 
     const seatsNumber = parseInt(seats, 10)
 
@@ -429,6 +476,7 @@ class ManageAvailabilityCalendar extends Component {
       availabilityPlan,
       onMonthChanged,
       monthFormat,
+      intl,
       ...rest
     } = this.props;
     const { focused, date, currentMonth } = this.state;
@@ -520,18 +568,40 @@ class ManageAvailabilityCalendar extends Component {
               />
             </p>
           ) : null}
+
         </div>
-        <div className={css.calendarWrapper}>
+        <div className={css.inputWrapper}>
           <FieldTextInput
-            type="text"
-            id={`.input1`}
+            type="number"
+            min="0"
+            step="1"
+            id={SEATS_INPUT_ID}
             name="input1"
             label={"No date selected"}
-            labelId={".input1Label"}
+            labelId={SEATS_INPUT_LABEL_ID}
             defaultValue={this.state.seats}
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <FieldTextInput
+            type="number"
+            min="0"
+            step="1"
+            id={DEFAULT_SEATS_INPUT_ID}
+            name="input2"
+            label={"Default number of sites:"}
+            labelId={DEFAULT_SEATS_INPUT_LABEL_ID}
+            defaultValue={availabilityPlan.entries[0].seats}
+            isUncontrolled={true}
+            onSeatChange={this.onDefaultSeatChange}
+            customErrorText={this.state.defaultSeatError}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
           />
         </div>
       </div>
