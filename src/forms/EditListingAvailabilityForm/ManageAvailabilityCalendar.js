@@ -343,7 +343,7 @@ class ManageAvailabilityCalendar extends Component {
     this.setState({ date });
     this.setState({seatError: null})
 
-    const { availability } = this.props;
+    const { availability, listing } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
@@ -354,38 +354,38 @@ class ManageAvailabilityCalendar extends Component {
 
     if (hasAvailabilityException) {
       //Set to availabilityPlan exception
-      this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
+      this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats);
     } else {
       //Set to availabilityPlan default
-      this.updateSeatsSelector(date, listing.attributes.availabilityPlan[0].seats)
+      this.updateSeatsSelector(date, listing.attributes.availabilityPlan.entries[0].seats);
     }
   }
 
   onDefaultSeatChange(e) {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
 
     //Reset error string
     this.setState({defaultSeatError: null});
 
-    const {listing} = this.props
-    const seats = e.target.value
+    const {listing} = this.props;
+    const seats = e.target.value;
 
     //Ensure seat is a positive integer
     if (!(/^-?\d+$/.test(seats)) || parseInt(seats, 10) < 0) {
-      this.setState({defaultSeatError: "Enter a valid number"})
+      this.setState({defaultSeatError: "Enter a valid number"});
       return;
     }
 
-    if (seats === listing.attributes.availabilityPlan[0].seats)
-      return
+    if (seats === listing.attributes.availabilityPlan.entries[0].seats)
+      return;
 
     //Update listings availabilityPLan
     listing.attributes.availabilityPlan.entries.forEach((val) => {
-      val.seats = seats
+      val.seats = seats;
     })
 
-    this.updateDefaultSeats(seats)
+    this.updateDefaultSeats(seats);
   }
 
   onSeatChange(e) {

@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1d06c9a4-5a1a-4751-b2de-edf6f56a0f4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FieldTextInput/FieldTextInput.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forms/EditListingAvailabilityForm/ManageAvailabilityCalendar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.google.cloudcode.ide_session_index" value="20210219_0004" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210219_0005" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -76,6 +74,7 @@
       <workItem from="1613631142887" duration="10342000" />
       <workItem from="1613686942471" duration="4521000" />
       <workItem from="1613695340072" duration="2163000" />
+      <workItem from="1613732245776" duration="284000" />
     </task>
     <servers />
   </component>
