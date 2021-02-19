@@ -353,11 +353,11 @@ class ManageAvailabilityCalendar extends Component {
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
     if (hasAvailabilityException) {
-      console.log("hello")
+      //Set to availabilityPlan exception
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats)
     } else {
-      console.log("hello1")
-      this.updateSeatsSelector(date, 1)
+      //Set to availabilityPlan default
+      this.updateSeatsSelector(date, listing.attributes.availabilityPlan[0].seats)
     }
   }
 
@@ -376,6 +376,9 @@ class ManageAvailabilityCalendar extends Component {
       this.setState({defaultSeatError: "Enter a valid number"})
       return;
     }
+
+    if (seats === listing.attributes.availabilityPlan[0].seats)
+      return
 
     //Update listings availabilityPLan
     listing.attributes.availabilityPlan.entries.forEach((val) => {
@@ -406,6 +409,9 @@ class ManageAvailabilityCalendar extends Component {
       this.setState({seatError: "Enter a valid number"})
       return;
     }
+
+    if (seats === this.state.seats)
+      return
 
     const seatsNumber = parseInt(seats, 10)
 
