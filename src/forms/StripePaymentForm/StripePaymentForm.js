@@ -400,18 +400,21 @@ class StripePaymentForm extends Component {
         {billingDetailsNeeded && !loadingData ? (
           <React.Fragment>
             {showPaymentMethodSelector ? (
-              <PaymentMethodSelector
-                cardClasses={cardClasses}
-                formId={formId}
-                defaultPaymentMethod={ensuredDefaultPaymentMethod}
-                changePaymentMethod={this.changePaymentMethod}
-                handleStripeElementRef={this.handleStripeElementRef}
-                hasCardError={hasCardError}
-                error={this.state.error}
-                paymentMethod={selectedPaymentMethod}
-                intl={intl}
-              />
-            ) : (
+              <>
+                <PaymentMethodSelector
+                  cardClasses={cardClasses}
+                  formId={formId}
+                  defaultPaymentMethod={ensuredDefaultPaymentMethod}
+                  changePaymentMethod={this.changePaymentMethod}
+                  handleStripeElementRef={this.handleStripeElementRef}
+                  hasCardError={hasCardError}
+                  error={this.state.error}
+                  paymentMethod={selectedPaymentMethod}
+                  intl={intl}
+                />
+                <p className={css.paymentInfoPaymentSelector}>{paymentInfo}</p>
+              </>
+              ) : (
               <React.Fragment>
                 <h3 className={css.paymentHeading}>
                   <FormattedMessage id="StripePaymentForm.paymentHeading" />
