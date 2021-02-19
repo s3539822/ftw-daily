@@ -446,9 +446,9 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionCapacity publicData={publicData} options={capacityOptions} />
                   <SectionDescriptionMaybe description={description} />
                   <SectionViewMaybe options={viewOptions} publicData={publicData} />
+                  <SectionCapacity publicData={publicData} options={capacityOptions} />
 
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
