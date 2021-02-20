@@ -3,13 +3,15 @@ import { bool, func, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldSelect, FieldCheckboxGroup, Form } from '../../components';
 
 import css from './EditListingFeaturesForm.module.css';
+import { compose } from 'redux';
+import { EditListingCapacityFormComponent } from '../EditListingCapacityForm/EditListingCapacityForm';
 
 const EditListingFeaturesFormComponent = props => (
   <FinalForm
@@ -29,12 +31,17 @@ const EditListingFeaturesFormComponent = props => (
         updateInProgress,
         fetchErrors,
         filterConfig,
+        intl,
       } = formRenderProps;
 
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = disabled || submitInProgress;
+
+      const locationTypePlaceholder = intl.formatMessage({
+        id: 'EditListingFeaturesForm.locationPlaceholder',
+      });
 
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
@@ -73,6 +80,7 @@ const EditListingFeaturesFormComponent = props => (
             id={viewKey}
             label={'Location type'}
           >
+            <option disabled value="">{locationTypePlaceholder}</option>
             {viewOptions.map(o => (
               <option key={o.key} value={o.key}>
                 {o.label}
@@ -119,6 +127,8 @@ EditListingFeaturesFormComponent.propTypes = {
   filterConfig: propTypes.filterConfig,
 };
 
-const EditListingFeaturesForm = EditListingFeaturesFormComponent;
+
+
+const EditListingFeaturesForm = compose(injectIntl)(EditListingFeaturesFormComponent);
 
 export default EditListingFeaturesForm;

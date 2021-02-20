@@ -43,7 +43,7 @@ const EditListingFeaturesPanel = props => {
 
   const amenities = publicData && publicData.amenities;
   const view = publicData && publicData.view;
-  const initialValues = { amenities };
+  const initialValues = { amenities, view };
 
   return (
     <div className={classes}>
