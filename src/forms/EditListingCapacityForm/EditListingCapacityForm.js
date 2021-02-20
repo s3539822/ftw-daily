@@ -39,7 +39,7 @@ export const EditListingCapacityFormComponent = props => (
         id: 'EditListingCapacityForm.capacityPlaceholder',
       });
       const capacityTypePlaceholder = intl.formatMessage({
-        id: 'EditListingCapacityForm.capacityPlaceholder',
+        id: 'EditListingCapacityForm.capacityTypePlaceholder',
       });
 
       const errorMessage = updateError ? (
@@ -92,7 +92,7 @@ export const EditListingCapacityFormComponent = props => (
                 name="capacity_type"
                 id="capacity_type"
                 validate={capacityTypeRequired}
-              >
+              >q
                 <option disabled value="">{capacityTypePlaceholder}</option>
                 {capacityTypeOptions.map(c => (
                   <option key={c.key} value={c.key}>
