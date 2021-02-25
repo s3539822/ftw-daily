@@ -357,7 +357,7 @@ class ManageAvailabilityCalendar extends Component {
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats);
     } else {
       //Set to availabilityPlan default
-      this.updateSeatsSelector(date, listing.attributes.availabilityPlan.entries[0].seats);
+      this.updateSeatsSelector(date, this.props.availabilityPlan.entries[0].seats);
     }
   }
 
