@@ -4,11 +4,16 @@ import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { Form, Button } from '../../components';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
+import { Form, Button, FieldCurrencyInput } from '../../components';
 
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
 import css from './EditListingAvailabilityForm.module.css';
+import config from '../../config';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
@@ -33,6 +38,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             availabilityPlan,
             listingId,
             listing,
+            price,
           } = formRenderProps;
 
           const errorMessage = updateError ? (
@@ -46,6 +52,8 @@ export class EditListingAvailabilityFormComponent extends Component {
           const submitInProgress = updateInProgress;
           const submitDisabled = invalid || disabled || submitInProgress;
 
+
+
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
@@ -56,6 +64,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   listingId={listingId}
                   listing={listing}
                   intl={intl}
+                  defaultPrice={price}
                 />
               </div>
 

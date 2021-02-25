@@ -40,6 +40,14 @@
   .title {
     margin-bottom: 32px;
   }
+  .inputWrapper {
+    flex-grow: 1;
+    position: relative;
+    width: 50%;
+    max-width: 50%;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
 }
 
 @media (--viewportLarge) {
@@ -52,4 +60,9 @@
     width: 241px;
     margin-top: 86px;
   }
+}
+
+.priceInput {
+  flex-shrink: 0;
+  width: 100%;
 }

@@ -15,12 +15,17 @@ import {
   ensureAvailabilityException,
   ensureDayAvailabilityPlan,
 } from '../../util/data';
-import { DAYS_OF_WEEK, propTypes } from '../../util/types';
+import { DAYS_OF_WEEK, LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { FieldCurrencyInput, FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
 import config from '../../config';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 // Constants
 const SEATS_INPUT_ID = ".seatsInput"
@@ -29,7 +34,7 @@ const PRICE_INPUT_ID = ".priceInput"
 const PRICE_INPUT_LABEL_ID = ".priceInputLabel"
 const DEFAULT_SEATS_INPUT_ID = ".defaultSeatsInput"
 const DEFAULT_SEATS_INPUT_LABEL_ID = ".defaultSeatsInputLabel"
-const DEFAULT_PRICE_INPUT_ID = ".defaultPriceInput"
+const DEFAULT_PRICE_INPUT_ID = "price"
 const DEFAULT_PRICE_INPUT_LABEL_ID = ".defaultPriceInputLabel"
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;
@@ -300,7 +305,7 @@ class ManageAvailabilityCalendar extends Component {
     }
   }
 
-  onDayAvailabilityChange(date, seats, exceptions, price) {
+  onDayAvailabilityChange(date, seats, exceptions) {
     const { availabilityPlan, listingId } = this.props;
     const { start, end } = dateStartAndEndInUTC(date);
 
@@ -310,7 +315,7 @@ class ManageAvailabilityCalendar extends Component {
     ).seats;
 
     const currentException = findException(exceptions, date);
-    const draftException = makeDraftException(exceptions, start, end, seatsFromPlan, price);
+    const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
     const exception = currentException || draftException;
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
@@ -332,13 +337,13 @@ class ManageAvailabilityCalendar extends Component {
         this.props.availability
           .onDeleteAvailabilityException({ id, currentException: exception, seats: seatsFromPlan })
           .then(r => {
-            const params = { listingId, start, end, seats, price, currentException: exception };
+            const params = { listingId, start, end, seats, currentException: exception };
             this.props.availability.onCreateAvailabilityException(params);
           });
       }
     } else {
       // If there is no existing AvailabilityExceptions, just create a new one
-      const params = { listingId, start, end, seats, price, currentException: exception };
+      const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params);
     }
   }
@@ -358,11 +363,9 @@ class ManageAvailabilityCalendar extends Component {
 
 
     if (hasAvailabilityException) {
-      console.log(currentException.availabilityException.attributes)
       //Set to availabilityPlan exception
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats);
     } else {
-      console.log(listing.attributes)
       //Set to availabilityPlan default
       this.updateSeatsSelector(date, listing.attributes.availabilityPlan.entries[0].seats);
     }
@@ -440,7 +443,7 @@ class ManageAvailabilityCalendar extends Component {
       return;
     } else {
       //Set the new seat availability
-      this.onDayAvailabilityChange(date, seatsNumber, exceptions, 1);
+      this.onDayAvailabilityChange(date, seatsNumber, exceptions);
     }
   }
 
@@ -509,6 +512,45 @@ class ManageAvailabilityCalendar extends Component {
 
     const monthName = currentMonth.format('MMMM');
     const classes = classNames(rootClassName || css.root, className);
+
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isDaily = unitType === LINE_ITEM_DAY;
+
+    const translationKey = isNightly
+      ? 'EditListingPricingForm.pricePerNight'
+      : isDaily
+        ? 'EditListingPricingForm.pricePerDay'
+        : 'EditListingPricingForm.pricePerUnit';
+
+    const pricePerUnitMessage = intl.formatMessage({
+      id: translationKey,
+    });
+
+    const pricePlaceholderMessage = intl.formatMessage({
+      id: 'EditListingPricingForm.priceInputPlaceholder',
+    });
+
+    const priceRequired = validators.required(
+      intl.formatMessage({
+        id: 'EditListingPricingForm.priceRequired',
+      })
+    );
+    const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+    const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+      intl.formatMessage(
+        {
+          id: 'EditListingPricingForm.priceTooLow',
+        },
+        {
+          minPrice: formatMoney(intl, minPrice),
+        }
+      ),
+      config.listingMinimumPriceSubUnits
+    );
+    const priceValidators = config.listingMinimumPriceSubUnits
+      ? validators.composeValidators(priceRequired, minPriceRequired)
+      : priceRequired;
 
     return (
       <div
@@ -635,7 +677,7 @@ class ManageAvailabilityCalendar extends Component {
             className={css.defaultSiteInput}
             autoFocus
             label={"No date selected"}
-            placeholder={0}
+            placeholder={this.props.defaultPrice}
             currencyConfig={config.currencyConfig}
             onChange={(price) => console.log(price)}
             /*validate={priceValidators}*/
@@ -657,16 +699,16 @@ class ManageAvailabilityCalendar extends Component {
             rootClassName={css.defaultSiteInput}
             className={css.defaultSiteInput}
           />*/}
+
           <FieldCurrencyInput
-            id={DEFAULT_PRICE_INPUT_ID}
-            name={DEFAULT_PRICE_INPUT_ID}
-            labelId={DEFAULT_PRICE_INPUT_LABEL_ID}
+            id="price"
+            name="price"
             className={css.defaultSiteInput}
             autoFocus
-            label={"Default price per night"}
-            placeholder={0}
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
             currencyConfig={config.currencyConfig}
-            /*validate={priceValidators}*/
+            validate={priceValidators}
           />
         </div>
       </div>

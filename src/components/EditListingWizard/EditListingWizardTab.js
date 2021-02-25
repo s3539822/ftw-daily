@@ -28,7 +28,7 @@ export const FEATURES = 'features';
 export const CAPACITY = 'capacity';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
-export const PRICING = 'pricing';
+/*export const PRICING = 'pricing';*/
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
@@ -38,7 +38,7 @@ export const SUPPORTED_TABS = [
   CAPACITY,
   POLICY,
   LOCATION,
-  PRICING,
+  /*PRICING,*/
   AVAILABILITY,
   PHOTOS,
 ];
@@ -230,7 +230,7 @@ const EditListingWizardTab = props => {
         />
       );
     }
-    case PRICING: {
+    /*case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
         : 'EditListingWizard.saveEditPricing';
@@ -243,7 +243,7 @@ const EditListingWizardTab = props => {
           }}
         />
       );
-    }
+    }*/
     case AVAILABILITY: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewAvailability'

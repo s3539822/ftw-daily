@@ -33,16 +33,17 @@ const EditListingAvailabilityPanel = props => {
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
-      { dayOfWeek: 'mon', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'tue', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'wed', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'thu', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'fri', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'sat', seats: DEFAULT_SEATS, price: 0 },
-      { dayOfWeek: 'sun', seats: DEFAULT_SEATS, price: 0 },
+      { dayOfWeek: 'mon', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'tue', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'wed', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'thu', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'fri', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'sat', seats: DEFAULT_SEATS },
+      { dayOfWeek: 'sun', seats: DEFAULT_SEATS },
     ],
   };
   const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
+  const { price } = currentListing.attributes;
 
   return (
     <div className={classes}>
@@ -59,15 +60,16 @@ const EditListingAvailabilityPanel = props => {
       <EditListingAvailabilityForm
         className={css.form}
         listingId={currentListing.id}
-        initialValues={{ availabilityPlan }}
+        initialValues={{ availabilityPlan, price }}
         availability={availability}
         availabilityPlan={availabilityPlan}
-        onSubmit={() => {
+        onSubmit={values => {
           // We save the default availability plan
           // I.e. this listing is available every night.
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
-          onSubmit({ availabilityPlan });
+          const { availabilityPlan, price } = values;
+          onSubmit({ availabilityPlan, price });
         }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
