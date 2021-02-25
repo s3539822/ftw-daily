@@ -35,7 +35,6 @@ const PRICE_INPUT_LABEL_ID = ".priceInputLabel"
 const DEFAULT_SEATS_INPUT_ID = ".defaultSeatsInput"
 const DEFAULT_SEATS_INPUT_LABEL_ID = ".defaultSeatsInputLabel"
 const DEFAULT_PRICE_INPUT_ID = "price"
-const DEFAULT_PRICE_INPUT_LABEL_ID = ".defaultPriceInputLabel"
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;
 const MAX_BOOKINGS_RANGE = 180;
@@ -629,27 +628,10 @@ class ManageAvailabilityCalendar extends Component {
             name="input1"
             label={"No date selected"}
             labelId={SEATS_INPUT_LABEL_ID}
-            defaultValue={this.state.seats}
+            defaultValue={0}
             isUncontrolled={true}
             onSeatChange={this.onSeatChange}
             customErrorText={this.state.seatError}
-            rootClassName={css.defaultSiteInput}
-            className={css.defaultSiteInput}
-          />
-        </div>
-        <div className={css.inputWrapper}>
-          <FieldTextInput
-            type="number"
-            min="0"
-            step="1"
-            id={DEFAULT_SEATS_INPUT_ID}
-            name="input2"
-            label={"Default number of sites:"}
-            labelId={DEFAULT_SEATS_INPUT_LABEL_ID}
-            defaultValue={availabilityPlan.entries[0].seats}
-            isUncontrolled={true}
-            onSeatChange={this.onDefaultSeatChange}
-            customErrorText={this.state.defaultSeatError}
             rootClassName={css.defaultSiteInput}
             className={css.defaultSiteInput}
           />
@@ -684,7 +666,7 @@ class ManageAvailabilityCalendar extends Component {
           />
         </div>
         <div className={css.inputWrapper}>
-          {/*<FieldTextInput
+          <FieldTextInput
             type="number"
             min="0"
             step="1"
@@ -698,11 +680,12 @@ class ManageAvailabilityCalendar extends Component {
             customErrorText={this.state.defaultSeatError}
             rootClassName={css.defaultSiteInput}
             className={css.defaultSiteInput}
-          />*/}
-
+          />
+        </div>
+        <div className={css.inputWrapper}>
           <FieldCurrencyInput
-            id="price"
-            name="price"
+            id={DEFAULT_PRICE_INPUT_ID}
+            name={DEFAULT_PRICE_INPUT_ID}
             className={css.defaultSiteInput}
             autoFocus
             label={pricePerUnitMessage}

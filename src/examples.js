@@ -80,7 +80,6 @@ import * as EditListingFeaturesForm from './forms/EditListingFeaturesForm/EditLi
 import * as EditListingLocationForm from './forms/EditListingLocationForm/EditListingLocationForm.example';
 import * as EditListingPhotosForm from './forms/EditListingPhotosForm/EditListingPhotosForm.example';
 import * as EditListingPoliciesForm from './forms/EditListingPoliciesForm/EditListingPoliciesForm.example';
-import * as EditListingPricingForm from './forms/EditListingPricingForm/EditListingPricingForm.example';
 import * as EmailVerificationForm from './forms/EmailVerificationForm/EmailVerificationForm.example';
 import * as EnquiryForm from './forms/EnquiryForm/EnquiryForm.example';
 import * as FilterForm from './forms/FilterForm/FilterForm.example';
@@ -113,7 +112,6 @@ export {
   EditListingLocationForm,
   EditListingPhotosForm,
   EditListingPoliciesForm,
-  EditListingPricingForm,
   EmailVerificationForm,
   EnquiryForm,
   ExpandingTextarea,

@@ -43,7 +43,10 @@ const EditListingAvailabilityPanel = props => {
     ],
   };
   const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
+  const availabilityPricePlan = currentListing.attributes.publicData
   const { price } = currentListing.attributes;
+
+  console.log(currentListing.attributes)
 
   return (
     <div className={classes}>
@@ -60,7 +63,7 @@ const EditListingAvailabilityPanel = props => {
       <EditListingAvailabilityForm
         className={css.form}
         listingId={currentListing.id}
-        initialValues={{ availabilityPlan, price }}
+        initialValues={{ availabilityPlan, price, availabilityPricePlan }}
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {
