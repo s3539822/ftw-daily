@@ -17,15 +17,20 @@ import {
 } from '../../util/data';
 import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
-import { FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
+import { FieldCurrencyInput, FieldTextInput, IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.module.css';
+import config from '../../config';
 
 // Constants
 const SEATS_INPUT_ID = ".seatsInput"
 const SEATS_INPUT_LABEL_ID = ".seatsInputLabel"
+const PRICE_INPUT_ID = ".priceInput"
+const PRICE_INPUT_LABEL_ID = ".priceInputLabel"
 const DEFAULT_SEATS_INPUT_ID = ".defaultSeatsInput"
 const DEFAULT_SEATS_INPUT_LABEL_ID = ".defaultSeatsInputLabel"
+const DEFAULT_PRICE_INPUT_ID = ".defaultPriceInput"
+const DEFAULT_PRICE_INPUT_LABEL_ID = ".defaultPriceInputLabel"
 const HORIZONTAL_ORIENTATION = 'horizontal';
 const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;
 const MAX_BOOKINGS_RANGE = 180;
@@ -197,15 +202,14 @@ const renderDayContents = (calendar, availabilityPlan) => date => {
   );
 };
 
-const makeDraftException = (exceptions, start, end, seats) => {
-  const draft = ensureAvailabilityException({ attributes: { start, end, seats } });
+const makeDraftException = (exceptions, start, end, seats, price) => {
+  const draft = ensureAvailabilityException({ attributes: { start, end, seats, price } });
   return { availabilityException: draft };
 };
 
-const dateString = (date) => {
+const dateString = (date, string) => {
   const res = date._d.toString().split(" ");
-
-  return `Seats on: ${res[0]} ${res[1]} ${res[2]}, ${res[3]}`
+  return `${string} on: ${res[0]} ${res[1]} ${res[2]}, ${res[3]}`
 }
 
 ////////////////////////////////
@@ -228,6 +232,8 @@ class ManageAvailabilityCalendar extends Component {
       defaultSeatError: null,
     };
 
+    console.log(props.availabilityPlan)
+
     this.onDefaultSeatChange = this.onDefaultSeatChange.bind(this);
     this.updateDefaultSeats = this.updateDefaultSeats.bind(this);
     this.onSeatChange = this.onSeatChange.bind(this);
@@ -248,12 +254,10 @@ class ManageAvailabilityCalendar extends Component {
   }
 
   updateSeatsSelector(date, seats) {
-    document.getElementById(SEATS_INPUT_LABEL_ID).innerHTML = dateString(date);
-
-    if (seats === 0)
-      document.getElementById(SEATS_INPUT_ID).value = "Not available";
-    else
-      document.getElementById(SEATS_INPUT_ID).value = seats;
+    document.getElementById(SEATS_INPUT_LABEL_ID).innerHTML = dateString(date, "Seats");
+    document.getElementById(SEATS_INPUT_ID).value = seats;
+    document.getElementById(PRICE_INPUT_LABEL_ID).innerHTML = dateString(date, "Price");
+    /*document.getElementById(SEATS_INPUT_ID).value = seats;*/
   }
 
   updateDefaultSeats(seats) {
@@ -296,7 +300,7 @@ class ManageAvailabilityCalendar extends Component {
     }
   }
 
-  onDayAvailabilityChange(date, seats, exceptions) {
+  onDayAvailabilityChange(date, seats, exceptions, price) {
     const { availabilityPlan, listingId } = this.props;
     const { start, end } = dateStartAndEndInUTC(date);
 
@@ -306,7 +310,7 @@ class ManageAvailabilityCalendar extends Component {
     ).seats;
 
     const currentException = findException(exceptions, date);
-    const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
+    const draftException = makeDraftException(exceptions, start, end, seatsFromPlan, price);
     const exception = currentException || draftException;
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
@@ -328,13 +332,13 @@ class ManageAvailabilityCalendar extends Component {
         this.props.availability
           .onDeleteAvailabilityException({ id, currentException: exception, seats: seatsFromPlan })
           .then(r => {
-            const params = { listingId, start, end, seats, currentException: exception };
+            const params = { listingId, start, end, seats, price, currentException: exception };
             this.props.availability.onCreateAvailabilityException(params);
           });
       }
     } else {
       // If there is no existing AvailabilityExceptions, just create a new one
-      const params = { listingId, start, end, seats, currentException: exception };
+      const params = { listingId, start, end, seats, price, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params);
     }
   }
@@ -352,10 +356,13 @@ class ManageAvailabilityCalendar extends Component {
     const currentException = findException(exceptions, date);
     const hasAvailabilityException = currentException && currentException.availabilityException.id;
 
+
     if (hasAvailabilityException) {
+      console.log(currentException.availabilityException.attributes)
       //Set to availabilityPlan exception
       this.updateSeatsSelector(date, currentException.availabilityException.attributes.seats);
     } else {
+      console.log(listing.attributes)
       //Set to availabilityPlan default
       this.updateSeatsSelector(date, listing.attributes.availabilityPlan.entries[0].seats);
     }
@@ -410,6 +417,7 @@ class ManageAvailabilityCalendar extends Component {
       return;
     }
 
+    //If seats is not changed
     if (seats === this.state.seats)
       return
 
@@ -432,7 +440,7 @@ class ManageAvailabilityCalendar extends Component {
       return;
     } else {
       //Set the new seat availability
-      this.onDayAvailabilityChange(date, seatsNumber, exceptions);
+      this.onDayAvailabilityChange(date, seatsNumber, exceptions, 1);
     }
   }
 
@@ -602,6 +610,63 @@ class ManageAvailabilityCalendar extends Component {
             customErrorText={this.state.defaultSeatError}
             rootClassName={css.defaultSiteInput}
             className={css.defaultSiteInput}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          {/*<FieldTextInput
+            type="number"
+            min="0"
+            step="1"
+            id={SEATS_INPUT_ID}
+            name="input1"
+            label={"No date selected"}
+            labelId={SEATS_INPUT_LABEL_ID}
+            defaultValue={this.state.seats}
+            isUncontrolled={true}
+            onSeatChange={this.onSeatChange}
+            customErrorText={this.state.seatError}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
+          />*/}
+          <FieldCurrencyInput
+            id={PRICE_INPUT_ID}
+            name={PRICE_INPUT_ID}
+            labelId={PRICE_INPUT_LABEL_ID}
+            className={css.defaultSiteInput}
+            autoFocus
+            label={"No date selected"}
+            placeholder={0}
+            currencyConfig={config.currencyConfig}
+            onChange={(price) => console.log(price)}
+            /*validate={priceValidators}*/
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          {/*<FieldTextInput
+            type="number"
+            min="0"
+            step="1"
+            id={DEFAULT_SEATS_INPUT_ID}
+            name="input2"
+            label={"Default number of sites:"}
+            labelId={DEFAULT_SEATS_INPUT_LABEL_ID}
+            defaultValue={availabilityPlan.entries[0].seats}
+            isUncontrolled={true}
+            onSeatChange={this.onDefaultSeatChange}
+            customErrorText={this.state.defaultSeatError}
+            rootClassName={css.defaultSiteInput}
+            className={css.defaultSiteInput}
+          />*/}
+          <FieldCurrencyInput
+            id={DEFAULT_PRICE_INPUT_ID}
+            name={DEFAULT_PRICE_INPUT_ID}
+            labelId={DEFAULT_PRICE_INPUT_LABEL_ID}
+            className={css.defaultSiteInput}
+            autoFocus
+            label={"Default price per night"}
+            placeholder={0}
+            currencyConfig={config.currencyConfig}
+            /*validate={priceValidators}*/
           />
         </div>
       </div>
