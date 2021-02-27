@@ -35,6 +35,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             listing,
             price,
             availabilityPricePlan,
+            onSaveListingWizardTab,
           } = formRenderProps;
 
           const errorMessage = updateError ? (
@@ -61,6 +62,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   listing={listing}
                   intl={intl}
                   defaultPrice={price}
+                  onSaveListingWizardTab={onSaveListingWizardTab}
                 />
               </div>
 

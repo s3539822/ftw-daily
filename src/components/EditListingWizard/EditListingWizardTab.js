@@ -142,6 +142,42 @@ const EditListingWizardTab = props => {
     }
   };
 
+  const onSaveListingWizardTab = (tab, updateValues) => {
+    // Normalize images for API call
+    const { images: updatedImages, ...otherValues } = updateValues;
+    const imageProperty =
+      typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
+    const updateValuesWithImages = { ...otherValues, ...imageProperty };
+
+    if (isNewListingFlow) {
+      const onUpsertListingDraft = isNewURI
+        ? (tab, updateValues) => onCreateListingDraft(updateValues)
+        : onUpdateListing;
+
+      const upsertValues = isNewURI
+        ? updateValuesWithImages
+        : { ...updateValuesWithImages, id: currentListing.id };
+
+      onUpsertListingDraft(tab, upsertValues)
+        .then(() => {
+          /*if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
+            // Create listing flow: smooth scrolling polyfill to scroll to correct tab
+            handleCreateFlowTabScrolling(false);
+
+            // After successful saving of draft data, user should be redirected to next tab
+            redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
+          } else {
+            handlePublishListing(currentListing.id);
+          }*/
+        })
+        .catch(e => {
+          // No need for extra actions
+        });
+    } else {
+      onUpdateListing(tab, { ...updateValuesWithImages, id: currentListing.id });
+    }
+  };
+
   const panelProps = tab => {
     return {
       className: css.panel,
@@ -236,6 +272,10 @@ const EditListingWizardTab = props => {
           {...panelProps(AVAILABILITY)}
           availability={availability}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSaveListingWizardTab={values => {
+            console.log(values)
+            onSaveListingWizardTab(tab, values);
+          }}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}

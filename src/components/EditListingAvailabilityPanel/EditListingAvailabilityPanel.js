@@ -25,6 +25,7 @@ const EditListingAvailabilityPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
+    onSaveListingWizardTab,
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -71,9 +72,14 @@ const EditListingAvailabilityPanel = props => {
           // I.e. this listing is available every night.
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
-          const { availabilityPlan, price } = values;
+          const { availabilityPlan, price, ...rest } = values;
+
+          console.log(rest)
+          console.log(values)
+
           onSubmit({ availabilityPlan, price });
         }}
+        onSaveListingWizardTab={onSaveListingWizardTab}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         disabled={disabled}

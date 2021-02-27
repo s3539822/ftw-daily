@@ -238,6 +238,7 @@ class ManageAvailabilityCalendar extends Component {
 
     console.log(props.availabilityPlan)
 
+    this.onPriceChange = this.onPriceChange.bind(this);
     this.onDefaultSeatChange = this.onDefaultSeatChange.bind(this);
     this.updateDefaultSeats = this.updateDefaultSeats.bind(this);
     this.onSeatChange = this.onSeatChange.bind(this);
@@ -446,6 +447,10 @@ class ManageAvailabilityCalendar extends Component {
     }
   }
 
+  onPriceChange(price) {
+    this.props.onSaveListingWizardTab(price)
+  }
+
   onFocusChange() {
     // Force the state.focused to always be truthy so that date is always selectable
     this.setState({ focused: true });
@@ -550,6 +555,9 @@ class ManageAvailabilityCalendar extends Component {
     const priceValidators = config.listingMinimumPriceSubUnits
       ? validators.composeValidators(priceRequired, minPriceRequired)
       : priceRequired;
+    const defaultPriceValidators = config.listingMinimumPriceSubUnits
+      ? validators.composeValidators(priceRequired, minPriceRequired)
+      : priceRequired;
 
     return (
       <div
@@ -637,21 +645,6 @@ class ManageAvailabilityCalendar extends Component {
           />
         </div>
         <div className={css.inputWrapper}>
-          {/*<FieldTextInput
-            type="number"
-            min="0"
-            step="1"
-            id={SEATS_INPUT_ID}
-            name="input1"
-            label={"No date selected"}
-            labelId={SEATS_INPUT_LABEL_ID}
-            defaultValue={this.state.seats}
-            isUncontrolled={true}
-            onSeatChange={this.onSeatChange}
-            customErrorText={this.state.seatError}
-            rootClassName={css.defaultSiteInput}
-            className={css.defaultSiteInput}
-          />*/}
           <FieldCurrencyInput
             id={PRICE_INPUT_ID}
             name={PRICE_INPUT_ID}
@@ -661,8 +654,8 @@ class ManageAvailabilityCalendar extends Component {
             label={"No date selected"}
             placeholder={this.props.defaultPrice}
             currencyConfig={config.currencyConfig}
-            onChange={(price) => console.log(price)}
-            /*validate={priceValidators}*/
+            onChange={this.onPriceChange}
+            validate={priceValidators}
           />
         </div>
         <div className={css.inputWrapper}>
@@ -691,7 +684,7 @@ class ManageAvailabilityCalendar extends Component {
             label={pricePerUnitMessage}
             placeholder={pricePlaceholderMessage}
             currencyConfig={config.currencyConfig}
-            validate={priceValidators}
+            validate={defaultPriceValidators}
           />
         </div>
       </div>
